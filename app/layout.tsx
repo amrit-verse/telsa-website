@@ -29,18 +29,18 @@ export const metadata: Metadata = {
   },
   description: "The official website and management platform for TeLSA, promoting legal education, unity, and social justice among Terai/Madhesh law students.",
   keywords: ["TeLSA", "Law Students", "Nepal", "Terai", "Madhesh", "Legal Education", "Moot Court"],
-  metadataBase: new URL(organization.domain),
+  metadataBase: new URL("https://telsa.org.np"),
   alternates: {
-    canonical: "/",
+    canonical: "https://telsa.org.np",
   },
   openGraph: {
     title: organization.name,
     description: "Promoting legal education and social justice among Terai/Madhesh law students.",
-    url: organization.domain,
+    url: "https://telsa.org.np",
     siteName: organization.name,
     locale: "en_NP",
     type: "website",
-    // images: [{ url: "/og-image.png", width: 1200, height: 630 }], // Placeholder for actual OG image
+    images: [{ url: "https://telsa.org.np/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
