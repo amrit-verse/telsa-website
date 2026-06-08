@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { db as prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import EditEventForm from "@/components/dashboard/events/edit-form";
 import Link from "next/link";

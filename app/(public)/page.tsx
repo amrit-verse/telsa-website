@@ -57,7 +57,7 @@ export default function HomePage() {
                 <h2 className="font-serif text-2xl font-bold text-primary mb-2">Message from the Leadership</h2>
                 <div className="w-16 h-1 bg-secondary mx-auto md:mx-0 mb-6"></div>
                 <blockquote className="text-lg italic text-muted-foreground leading-relaxed mb-6">
-                  "{president.message}"
+                  &quot;{president.message}&quot;
                 </blockquote>
                 <div>
                   <h3 className="font-bold text-primary">{president.name}</h3>

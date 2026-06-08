@@ -1,4 +1,5 @@
-import prisma from "@/lib/db";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { db as prisma } from "@/lib/db";
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";

@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/db";
+import { db as prisma } from "@/lib/db";
 import { uploadImageToCloudinary, deleteImageFromCloudinary } from "./cloudinary";
 import { revalidatePath } from "next/cache";
 import { MembershipApplicationSchema } from "@/lib/validations/membership";
@@ -63,7 +63,7 @@ export async function applyForMembership(formData: FormData) {
     if (!validatedData.success) {
       return { 
         success: false, 
-        error: "Validation failed: " + validatedData.error.errors.map(e => e.message).join(", ") 
+        error: "Validation failed: " + validatedData.error.issues.map((e: {message: string}) => e.message).join(", ") 
       };
     }
 

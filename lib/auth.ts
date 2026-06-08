@@ -56,7 +56,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, user }) {
       // First time login, 'user' is populated from authorize()
       if (user) {
-        token.id = user.id;
+        if (user?.id) token.id = user.id;
         token.role = user.role;
         token.status = user.status;
       }

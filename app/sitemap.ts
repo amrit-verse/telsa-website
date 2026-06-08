@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import prisma from '@/lib/db';
+import { db as prisma } from "@/lib/db";
 
 const BASE_URL = 'https://telsa.org.np';
 

@@ -12,7 +12,7 @@ export default function MobileNav() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
+      <SheetTrigger>
         <button 
           className="md:hidden p-2 text-primary focus:outline-none focus:ring-2 focus:ring-secondary rounded-sm"
           aria-label="Open mobile navigation menu"

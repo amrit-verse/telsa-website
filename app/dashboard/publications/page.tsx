@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { db as prisma } from "@/lib/db";
 import Link from "next/link";
 import { Search, Plus, Eye, Download, Edit } from "lucide-react";
 import { format } from "date-fns";

@@ -1,4 +1,5 @@
-import prisma from "@/lib/db";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { db as prisma } from "@/lib/db";
 import Link from "next/link";
 import { Search, Filter, UserCheck, Clock, XCircle, ShieldAlert, ChevronLeft, ChevronRight } from "lucide-react";
 import { format } from "date-fns";

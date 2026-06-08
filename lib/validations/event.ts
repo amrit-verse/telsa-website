@@ -11,16 +11,16 @@ export const EventRegistrationSchema = z.object({
 export const EventCreateSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   slug: z.string().min(3, "Slug must be at least 3 characters").regex(/^[a-z0-9-]+$/, "Slug must contain only lowercase letters, numbers, and hyphens"),
-  category: z.string().min(2, "Category is required"),
+  category: z.string().min(1, "Category is required"),
   shortDescription: z.string().min(10, "Short description must be at least 10 characters"),
-  description: z.string().min(20, "Description must be at least 20 characters"),
-  startDate: z.coerce.date({ required_error: "Start date is required" }),
+  description: z.string().min(20, "Full description must be at least 20 characters"),
+  startDate: z.coerce.date({ message: "Start date is required" }),
   endDate: z.coerce.date().optional().nullable(),
-  location: z.string().min(2, "Location is required"),
-  status: z.enum(["DRAFT", "PUBLISHED", "COMPLETED", "CANCELLED"], { required_error: "Status is required" }),
+  location: z.string().min(3, "Location is required"),
+  status: z.enum(["DRAFT", "PUBLISHED", "COMPLETED", "CANCELLED"], { message: "Status is required" }),
   registrationRequired: z.boolean().default(false),
   registrationDeadline: z.coerce.date().optional().nullable(),
-  maxParticipants: z.coerce.number().min(1).optional().nullable(),
+  maxParticipants: z.coerce.number().positive("Must be positive").optional().nullable(),
 }).refine((data) => {
   if (data.endDate && data.startDate) {
     return data.endDate > data.startDate;

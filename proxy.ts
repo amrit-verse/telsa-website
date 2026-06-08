@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-export default auth((req) => {
+export default auth((req: any) => {
   const isLoggedIn = !!req.auth;
   const isDashboardRoute = req.nextUrl.pathname.startsWith("/dashboard");
   

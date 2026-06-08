@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/db";
+import { db as prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { PublicationCreateSchema } from "@/lib/validations/publication";
@@ -21,7 +21,7 @@ export async function createPublication(formData: FormData) {
     };
 
     const validatedData = PublicationCreateSchema.safeParse(rawData);
-    if (!validatedData.success) return { success: false, error: validatedData.error.errors.map(e => e.message).join(", ") };
+    if (!validatedData.success) return { success: false, error: validatedData.error.issues.map((e: {message: string}) => e.message).join(", ") };
 
     const pdfFile = formData.get("pdfFile") as File;
     if (!pdfFile || pdfFile.size === 0) return { success: false, error: "PDF Document is required." };
@@ -72,7 +72,7 @@ export async function updatePublication(id: string, formData: FormData) {
     };
 
     const validatedData = PublicationCreateSchema.safeParse(rawData);
-    if (!validatedData.success) return { success: false, error: validatedData.error.errors.map(e => e.message).join(", ") };
+    if (!validatedData.success) return { success: false, error: validatedData.error.issues.map((e: {message: string}) => e.message).join(", ") };
 
     const pub = await prisma.publication.findUnique({ where: { id } });
     if (!pub) return { success: false, error: "Publication not found" };

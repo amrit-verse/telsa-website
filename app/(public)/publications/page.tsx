@@ -1,4 +1,5 @@
-import prisma from "@/lib/db";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { db as prisma } from "@/lib/db";
 import Link from "next/link";
 import Image from "next/image";
 import { Search, FileText, Download, BookOpen, Clock } from "lucide-react";
@@ -46,7 +47,7 @@ export default async function PublicPublicationsPage({
         <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">Resource Library</h1>
         <div className="w-24 h-1 bg-secondary mx-auto mb-6"></div>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          TeLSA's open academic repository. Access research papers, comprehensive notes, and legal articles authored by students and professionals.
+          TeLSA&apos;s open academic repository. Access research papers, comprehensive notes, and legal articles authored by students and professionals.
         </p>
       </div>
 

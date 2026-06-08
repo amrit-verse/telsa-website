@@ -16,7 +16,7 @@ export default function ExecutiveCommitteePage() {
         <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">Executive Committee</h1>
         <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          The dedicated leadership team guiding the Terai Law Students' Association towards its mission of legal literacy, unity, and student empowerment.
+          The dedicated leadership team guiding the Terai Law Students&apos; Association towards its mission of legal literacy, unity, and student empowerment.
         </p>
       </div>
 

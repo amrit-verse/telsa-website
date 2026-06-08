@@ -13,7 +13,7 @@ export default function AboutPage() {
         <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">About TeLSA</h1>
         <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-          Established in 2080 B.S. in Pokhara Metropolitan City, Kaski, Nepal, the Terai Law Students' Association is a premier organization representing the interests and aspirations of law students from the Terai/Madhesh region.
+          Established in 2080 B.S. in Pokhara Metropolitan City, Kaski, Nepal, the Terai Law Students&apos; Association is a premier organization representing the interests and aspirations of law students from the Terai/Madhesh region.
         </p>
       </div>
 

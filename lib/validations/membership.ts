@@ -12,11 +12,11 @@ export const MembershipApplicationSchema = z.object({
   academicLevel: z.string().min(2, "Academic level is required"),
   
   // Eligibility
-  district: z.string().min(2, "District is required"),
-  category: z.string().min(2, "Category is required (Select 'General' if not applicable)"),
+  district: z.string().min(1, "District is required"),
+  category: z.string().min(1, "Eligibility category is required"),
   
   // Membership Details
-  type: z.enum(["ORDINARY", "LIFETIME"], { required_error: "Membership type is required" }),
+  type: z.enum(["ORDINARY", "LIFETIME"], { message: "Membership type is required" }),
   
   // We don't validate the File objects heavily in this text schema
   // because FormData parsing is handled directly in the Server Action,

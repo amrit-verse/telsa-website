@@ -18,7 +18,7 @@ export default function DashboardHeader() {
       <div className="flex items-center gap-4">
         {/* Mobile Sidebar Trigger */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
+          <SheetTrigger>
             <button className="md:hidden p-2 text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-secondary rounded-sm" aria-label="Open Admin Menu">
               <Menu className="w-5 h-5" />
             </button>
@@ -64,7 +64,7 @@ export default function DashboardHeader() {
       <div className="flex items-center gap-4">
         {/* User Profile Dropdown */}
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger>
             <button className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-secondary rounded-full" aria-label="User Menu">
               <Avatar className="w-9 h-9 border border-border shadow-sm">
                 <AvatarFallback className="bg-primary/5 text-primary font-bold text-sm">AD</AvatarFallback>

@@ -28,7 +28,7 @@ export default function MembershipPage() {
             </li>
             <li className="flex gap-3">
               <svg className="w-6 h-6 text-secondary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-              <span>Must be enrolled as a <strong>Bachelor's level law student or above</strong>.</span>
+              <span>Must be enrolled as a <strong>Bachelor&apos;s level law student or above</strong>.</span>
             </li>
             <li className="flex gap-3">
               <svg className="w-6 h-6 text-secondary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>

@@ -170,7 +170,7 @@ export default function JoinPage() {
               )}
             </button>
             <p className="text-xs text-center text-muted-foreground mt-4">
-              By submitting, you agree to the rules and regulations of the Terai Law Students' Association.
+              By submitting, you agree to the rules and regulations of the Terai Law Students&apos; Association.
             </p>
           </div>
         </form>

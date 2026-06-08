@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { db as prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, Download, Users } from "lucide-react";

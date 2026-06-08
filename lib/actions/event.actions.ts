@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
-import prisma from "@/lib/db";
+import { db as prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { EventCreateSchema, EventRegistrationSchema } from "@/lib/validations/event";
@@ -37,7 +38,7 @@ export async function createEvent(formData: FormData) {
     };
 
     const validatedData = EventCreateSchema.safeParse(rawData);
-    if (!validatedData.success) return { success: false, error: validatedData.error.errors.map(e => e.message).join(", ") };
+    if (!validatedData.success) return { success: false, error: validatedData.error.issues.map((e: {message: string}) => e.message).join(", ") };
 
     const bannerImage = formData.get("bannerImage") as File;
     let imageUrl = null; let publicId = null;
@@ -75,7 +76,7 @@ export async function updateEvent(eventId: string, formData: FormData) {
     };
 
     const validatedData = EventCreateSchema.safeParse(rawData);
-    if (!validatedData.success) return { success: false, error: validatedData.error.errors.map(e => e.message).join(", ") };
+    if (!validatedData.success) return { success: false, error: validatedData.error.issues.map((e: {message: string}) => e.message).join(", ") };
 
     const event = await prisma.event.findUnique({ where: { id: eventId } });
     if (!event) return { success: false, error: "Event not found" };
@@ -145,7 +146,7 @@ export async function registerForEvent(formData: FormData) {
     };
 
     const validatedData = EventRegistrationSchema.safeParse(rawData);
-    if (!validatedData.success) return { success: false, error: validatedData.error.errors.map(e => e.message).join(", ") };
+    if (!validatedData.success) return { success: false, error: validatedData.error.issues.map((e: {message: string}) => e.message).join(", ") };
 
     const { eventId, name, email, phone, college } = validatedData.data;
 
