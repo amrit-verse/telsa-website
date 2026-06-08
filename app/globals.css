@@ -9,8 +9,8 @@
   --background: oklch(0.99 0.01 250); /* Pearl / Off-white */
   --foreground: oklch(0.15 0.03 250); /* Deep Navy dark */
   
-  /* Primary: Deep Navy (#0F172A) */
-  --primary: oklch(0.25 0.04 250);
+  /* Primary: Deep Academic Navy */
+  --primary: oklch(0.18 0.04 250);
   --primary-foreground: oklch(0.98 0.01 250);
   
   /* Secondary / Accent: Brass (#997A00) for WCAG 4.5:1 compliance */
@@ -48,7 +48,7 @@
 }
 
 .dark {
-  --background: oklch(0.12 0.03 250); /* Slate 950 */
+  --background: oklch(0.10 0.03 250); /* Deepest Navy / Near Black */
   --foreground: oklch(0.98 0.01 250);
   
   --primary: oklch(0.98 0.01 250);
@@ -117,6 +117,6 @@
   
   /* Global Heading Typography mapping to Playfair */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-tight text-primary dark:text-primary-foreground;
+    @apply font-serif tracking-normal text-primary dark:text-primary-foreground;
   }
 }

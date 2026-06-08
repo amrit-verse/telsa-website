@@ -18,10 +18,8 @@ export default function DashboardHeader() {
       <div className="flex items-center gap-4">
         {/* Mobile Sidebar Trigger */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger>
-            <button className="md:hidden p-2 text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-secondary rounded-sm" aria-label="Open Admin Menu">
-              <Menu className="w-5 h-5" />
-            </button>
+          <SheetTrigger className="md:hidden p-2 text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-secondary rounded-sm" aria-label="Open Admin Menu">
+            <Menu className="w-5 h-5" />
           </SheetTrigger>
           <SheetContent side="left" className="w-[280px] p-0 flex flex-col">
             <SheetTitle className="sr-only">Dashboard Navigation</SheetTitle>

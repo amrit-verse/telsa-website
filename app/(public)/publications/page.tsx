@@ -110,10 +110,17 @@ export default async function PublicPublicationsPage({
       </div>
 
       {publications.length === 0 && (
-        <div className="text-center py-24 bg-slate-50 dark:bg-slate-900 rounded-sm border border-border">
-          <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-primary mb-2">No Resources Found</h3>
-          <p className="text-muted-foreground">Try adjusting your search criteria or removing filters.</p>
+        <div className="text-center py-24 bg-slate-50 dark:bg-slate-900/50 rounded-sm border border-border shadow-sm max-w-3xl mx-auto">
+          <div className="w-20 h-20 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-6">
+            <BookOpen className="w-10 h-10 text-primary opacity-80" />
+          </div>
+          <h3 className="font-serif text-2xl font-bold text-primary mb-3">No Resources Found</h3>
+          <p className="text-muted-foreground text-lg max-w-lg mx-auto leading-relaxed mb-8">
+            We couldn&apos;t find any publications matching your current search criteria. Try adjusting your filters or search terms.
+          </p>
+          <Link href="/publications" className="inline-flex items-center justify-center h-12 px-8 bg-background border-2 border-primary text-primary font-medium rounded-sm hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary">
+            Clear All Filters
+          </Link>
         </div>
       )}
     </div>

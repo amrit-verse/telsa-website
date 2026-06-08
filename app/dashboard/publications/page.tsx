@@ -70,8 +70,19 @@ export default async function AdminPublicationsPage({
             <tbody className="divide-y divide-border">
               {publications.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-muted-foreground">
-                    No publications found.
+                  <td colSpan={5} className="px-6 py-20 text-center">
+                    <div className="max-w-md mx-auto">
+                      <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-4">
+                        <Eye className="w-8 h-8 text-primary opacity-70" />
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-primary mb-2">Resource Library is Empty</h3>
+                      <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                        No academic resources or publications match your criteria. Upload new materials to support student legal education.
+                      </p>
+                      <Link href="/dashboard/publications/new" className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground font-medium rounded-sm hover:bg-primary/90 transition-colors">
+                        <Plus className="w-4 h-4" /> Upload Resource
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ) : (

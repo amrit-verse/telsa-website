@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     template: `%s | ${organization.shortName}`,
     default: organization.name,
   },
-  description: "The official website and management platform for TeLSA, promoting legal education, unity, and social justice among Terai/Madhesh law students.",
-  keywords: ["TeLSA", "Law Students", "Nepal", "Terai", "Madhesh", "Legal Education", "Moot Court"],
+  description: "Terai Law Students Association (TeLSA) is a student-led organization at Prithvi Narayan Campus, established in 2080 B.S., dedicated to legal education, moot court activities, and legal awareness.",
+  keywords: ["TeLSA", "Law Students", "Nepal", "Terai", "Madhesh", "Student-led legal organization", "Prithvi Narayan Campus", "Established 2080 B.S.", "Legal education", "Moot court activities", "Legal awareness"],
   metadataBase: new URL("https://telsa.org.np"),
   alternates: {
     canonical: "https://telsa.org.np",
@@ -80,11 +80,12 @@ export default function RootLayout({
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Ward No. 1",
-      addressLocality: "Pokhara Metropolitan City",
-      addressRegion: "Kaski",
+      streetAddress: "Prithvi Narayan Campus",
+      addressLocality: "Pokhara",
+      addressRegion: "Gandaki",
       addressCountry: "NP",
     },
+    foundingDate: "2080 B.S.",
     sameAs: [
       organization.socials.facebook,
       organization.socials.twitter,

@@ -14,18 +14,16 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative w-full bg-primary py-24 md:py-32 overflow-hidden">
-        {/* Placeholder background texture */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
+      <section className="relative w-full bg-primary py-24 md:py-32 border-b border-primary/20">
         <div className="container relative mx-auto px-4 md:px-8 text-center text-primary-foreground">
-          <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 text-secondary border border-secondary/30 text-sm font-semibold tracking-wider uppercase mb-6">
+          <span className="inline-block py-1 px-3 rounded-sm bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-8">
             Est. {organization.established} | Kaski, Nepal
           </span>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
-            Empowering the Next Generation of Legal Minds
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-6 max-w-5xl mx-auto leading-tight text-white">
+            Advancing Legal Scholarship & Advocacy at Prithvi Narayan Campus.
           </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-            {organization.name} works tirelessly against discrimination, promoting legal literacy, unity, and professional development.
+          <p className="text-lg md:text-xl text-primary-foreground/80 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+            The Terai Law Students Association serves as the definitive representative body for Terai-origin scholars, dedicated to academic rigor and the uncompromising defense of student rights.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link 
@@ -44,14 +42,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* About TeLSA Section */}
+      <section className="py-20 md:py-28 bg-background border-b border-border">
+        <div className="container mx-auto px-6 md:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-6">About TeLSA</h2>
+            <div className="w-16 h-1 bg-secondary mx-auto mb-10"></div>
+            <p className="text-lg md:text-xl text-muted-foreground leading-loose">
+              Terai Law Students Association (TeLSA) is a student-led organization representing Terai-origin law students studying at Prithvi Narayan Campus, Pokhara. Established in 2080 B.S., TeLSA promotes unity, academic excellence, leadership, and social responsibility. Through legal awareness programs, moot court activities, research initiatives, cultural events, and community engagement, the association empowers students while preserving the rich cultural heritage of the Terai region.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* President's Message Section */}
       {president && (
         <section className="py-20 bg-slate-50 dark:bg-slate-900 border-b border-border">
           <div className="container mx-auto px-4 md:px-8">
             <div className="max-w-4xl mx-auto bg-card border border-border p-8 md:p-12 rounded-sm shadow-sm flex flex-col md:flex-row gap-8 items-center">
-              <div className="shrink-0 w-48 h-48 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-background shadow-md overflow-hidden flex items-center justify-center">
-                {/* President Image Placeholder */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground opacity-50"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <div className="shrink-0 w-40 h-40 md:w-48 md:h-48 rounded-sm bg-primary flex items-center justify-center border border-primary/20 overflow-hidden">
+                <span className="font-serif text-5xl md:text-6xl text-primary-foreground font-bold tracking-widest">AKR</span>
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="font-serif text-2xl font-bold text-primary mb-2">Message from the Leadership</h2>
@@ -116,15 +126,16 @@ export default function HomePage() {
       </section>
 
       {/* Latest Events Teaser */}
-      <section className="py-20 bg-slate-50 border-y border-border dark:bg-slate-900/50">
+      <section className="py-24 bg-white dark:bg-slate-950 border-y border-border">
         <div className="container mx-auto px-4 md:px-8 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-8">Recent Activities</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-10">Explore our latest moot court competitions, legal awareness campaigns, and cultural programs.</p>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-6">Recent Proceedings</h2>
+          <div className="w-16 h-px bg-secondary mx-auto mb-8"></div>
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-12 text-lg">Examine the records of our latest moot court competitions, legal awareness campaigns, and formal assemblies.</p>
           <Link 
             href="/events" 
-            className="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+            className="inline-flex h-12 items-center justify-center rounded-sm bg-transparent border border-primary px-8 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
           >
-            View All Events
+            Access Event Archive
           </Link>
         </div>
       </section>

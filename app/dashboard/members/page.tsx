@@ -130,8 +130,16 @@ export default async function MembersTablePage({
             <tbody className="divide-y divide-border">
               {memberships.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-muted-foreground">
-                    No membership applications found matching your criteria.
+                  <td colSpan={6} className="px-6 py-20 text-center">
+                    <div className="max-w-md mx-auto">
+                      <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-4">
+                        <UserCheck className="w-8 h-8 text-primary opacity-70" />
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-primary mb-2">No Applications Found</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        There are currently no membership applications matching the active filters or search queries.
+                      </p>
+                    </div>
                   </td>
                 </tr>
               ) : (

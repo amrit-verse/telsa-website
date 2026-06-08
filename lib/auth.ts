@@ -1,6 +1,9 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
+import { db } from "@/lib/db";
+import bcrypt from "bcryptjs";
+import { z } from "zod";
 
 // Module augmentation for strong typing in NextAuth v5
 declare module "next-auth" {
@@ -39,16 +42,38 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        /*
-          Proper Credential Validation Architecture Plan:
-          1. Validate 'credentials' object using Zod schema: z.object({ email: z.string().email(), password: z.string() })
-          2. Query DB: const user = await db.user.findUnique({ where: { email: parsed.email }, include: { membership: true } })
-          3. Check if user exists.
-          4. Compare Hash: const isValid = await bcrypt.compare(parsed.password, user.passwordHash)
-          5. If invalid -> return null
-          6. If valid -> return { id: user.id, email: user.email, name: user.name, role: user.role, status: user.membership?.status }
-        */
-        return null; 
+        if (!credentials?.email || !credentials?.password) return null;
+        
+        try {
+          const schema = z.object({
+            email: z.string().email(),
+            password: z.string()
+          });
+          
+          const parsed = schema.safeParse(credentials);
+          if (!parsed.success) return null;
+          
+          const user = await db.user.findUnique({
+            where: { email: parsed.data.email },
+            include: { membership: true }
+          });
+          
+          if (!user) return null;
+          
+          const isValid = await bcrypt.compare(parsed.data.password, user.passwordHash);
+          if (!isValid) return null;
+          
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            status: user.membership?.status
+          };
+        } catch (error) {
+          console.error("Auth error:", error);
+          return null;
+        }
       },
     }),
   ],

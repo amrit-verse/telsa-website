@@ -49,10 +49,17 @@ export default async function PublicEventsPage() {
       )}
 
       {events.length === 0 && (
-        <div className="text-center py-24 bg-slate-50 dark:bg-slate-900 rounded-sm border border-border">
-          <Calendar className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-primary mb-2">No Events Scheduled</h3>
-          <p className="text-muted-foreground">Check back soon for upcoming TeLSA events.</p>
+        <div className="text-center py-24 bg-slate-50 dark:bg-slate-900/50 rounded-sm border border-border shadow-sm max-w-3xl mx-auto">
+          <div className="w-20 h-20 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-6">
+            <Calendar className="w-10 h-10 text-primary opacity-80" />
+          </div>
+          <h3 className="font-serif text-2xl font-bold text-primary mb-3">Event Calendar Update in Progress</h3>
+          <p className="text-muted-foreground text-lg max-w-lg mx-auto leading-relaxed mb-8">
+            The TeLSA academic committee is currently finalizing the upcoming event schedule. Check back soon for new moot court competitions, legal awareness campaigns, and workshops.
+          </p>
+          <Link href="/contact" className="inline-flex items-center justify-center h-12 px-8 bg-background border-2 border-primary text-primary font-medium rounded-sm hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary">
+            Contact the Committee
+          </Link>
         </div>
       )}
     </div>

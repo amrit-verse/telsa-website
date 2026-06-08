@@ -12,6 +12,7 @@ enum Role {
   GUEST
   MEMBER
   ADMIN
+  SUPER_ADMIN
 }
 
 enum MembershipStatus {
