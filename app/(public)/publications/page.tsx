@@ -1,83 +1,120 @@
+import prisma from "@/lib/db";
+import Link from "next/link";
+import Image from "next/image";
+import { Search, FileText, Download, BookOpen, Clock } from "lucide-react";
+import { format } from "date-fns";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Publications & Resources",
-  description: "Access the official legal resource library of TeLSA, featuring research papers, notes, and Moot Court materials.",
+  title: "Resource Library | TeLSA",
+  description: "Explore the Terai Law Students' Association academic repository featuring research papers, legal notes, and moot court resources.",
+  openGraph: {
+    title: "Resource Library | TeLSA",
+    description: "Access TeLSA's extensive legal research archive.",
+    type: "website",
+  }
 };
 
-export default function PublicationsPage() {
-  const categories = ["Notes", "Research Papers", "Legal Articles", "Moot Court Resources"];
+export default async function PublicPublicationsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; type?: string }>;
+}) {
+  const resolvedParams = await searchParams;
+  const query = resolvedParams.q || "";
+  const typeFilter = resolvedParams.type || "";
+
+  const whereClause: any = {
+    status: "PUBLISHED",
+  };
+  
+  if (query) {
+    whereClause.title = { contains: query, mode: "insensitive" };
+  }
+  if (typeFilter) {
+    whereClause.type = typeFilter;
+  }
+
+  const publications = await prisma.publication.findMany({
+    where: whereClause,
+    orderBy: { publishedDate: "desc" },
+  });
 
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 max-w-6xl">
-      <div className="mb-12">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">Publications & Library</h1>
-        <div className="w-24 h-1 bg-secondary mb-8"></div>
-        <p className="text-lg text-muted-foreground max-w-3xl">
-          A centralized, professional legal repository for Terai law students. Access academic notes, published articles, and essential moot court preparation materials.
+    <div className="container mx-auto px-4 py-16 max-w-6xl">
+      <div className="text-center mb-16">
+        <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">Resource Library</h1>
+        <div className="w-24 h-1 bg-secondary mx-auto mb-6"></div>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          TeLSA's open academic repository. Access research papers, comprehensive notes, and legal articles authored by students and professionals.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Sidebar Filters */}
-        <aside className="lg:col-span-1">
-          <div className="bg-card border border-border rounded-sm p-6 sticky top-24">
-            <h3 className="font-bold text-primary uppercase tracking-wider mb-4 text-sm">Resource Categories</h3>
-            <ul className="space-y-2">
-              <li>
-                <button className="w-full text-left px-3 py-2 text-sm font-medium bg-primary/5 text-primary rounded-sm border-l-2 border-secondary">
-                  All Resources
-                </button>
-              </li>
-              {categories.map((cat, i) => (
-                <li key={i}>
-                  <button className="w-full text-left px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-slate-50 rounded-sm transition-colors">
-                    {cat}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            
-            <div className="mt-8 pt-6 border-t border-border">
-              <h3 className="font-bold text-primary uppercase tracking-wider mb-4 text-sm">Access Level</h3>
-              <div className="flex flex-col gap-3">
-                <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer">
-                  <input type="checkbox" className="rounded border-border text-secondary focus:ring-secondary" checked readOnly />
-                  Public Resources
-                </label>
-                <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer opacity-70">
-                  <input type="checkbox" className="rounded border-border" disabled />
-                  Members Only
-                  <span className="ml-auto text-[10px] bg-secondary/20 text-secondary px-2 py-0.5 rounded-sm">PRO</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        {/* Main Content List */}
-        <main className="lg:col-span-3">
-          {/* Search Bar UI */}
-          <div className="mb-8 flex gap-4">
-            <div className="relative flex-1">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-muted-foreground">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              </div>
-              <input type="text" placeholder="Search publications by title or author..." className="w-full pl-10 pr-4 py-2 border border-border rounded-sm bg-card text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary" />
-            </div>
-            <button className="px-6 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-sm hover:bg-primary/90">Search</button>
-          </div>
-
-          {/* Placeholder List */}
-          <div className="space-y-4">
-            <div className="p-8 text-center bg-card border border-dashed border-border rounded-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-4 text-muted-foreground opacity-50"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
-              <h3 className="font-serif text-xl text-primary font-bold mb-2">No Publications Yet</h3>
-              <p className="text-muted-foreground text-sm">The digital library is currently being compiled. Check back soon for research papers and moot court resources.</p>
-            </div>
-          </div>
-        </main>
+      {/* Search and Filters */}
+      <div className="bg-card border border-border p-4 rounded-sm shadow-sm mb-12 flex flex-col md:flex-row gap-4">
+        <form className="flex-1 relative">
+          <Search className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
+          <input 
+            type="text" 
+            name="q"
+            defaultValue={query}
+            placeholder="Search by title..." 
+            className="w-full pl-10 pr-4 py-3 border border-border rounded-sm bg-background focus:outline-none focus:border-secondary" 
+          />
+          {typeFilter && <input type="hidden" name="type" value={typeFilter} />}
+        </form>
+        
+        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+          <Link href="/publications" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${!typeFilter ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>All Resources</Link>
+          <Link href="/publications?type=RESEARCH_PAPER" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${typeFilter === 'RESEARCH_PAPER' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Research Papers</Link>
+          <Link href="/publications?type=NOTES" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${typeFilter === 'NOTES' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Notes</Link>
+          <Link href="/publications?type=LEGAL_ARTICLE" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${typeFilter === 'LEGAL_ARTICLE' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Articles</Link>
+        </div>
       </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {publications.map(pub => (
+          <div key={pub.id} className="bg-card border border-border rounded-sm shadow-sm flex flex-col transition-transform hover:-translate-y-1 hover:shadow-md overflow-hidden group">
+            {pub.coverImageUrl ? (
+              <div className="relative h-48 w-full bg-slate-100 border-b border-border overflow-hidden">
+                <Image src={pub.coverImageUrl} alt={pub.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+            ) : (
+              <div className="h-48 w-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-muted-foreground border-b border-border">
+                <BookOpen className="w-12 h-12 opacity-30" />
+              </div>
+            )}
+            
+            <div className="p-6 flex flex-col flex-1">
+              <div className="mb-3">
+                <span className="text-xs font-bold text-secondary uppercase tracking-wider">{pub.type.replace('_', ' ')}</span>
+              </div>
+              <h3 className="font-serif text-xl font-bold text-primary mb-2 line-clamp-2">{pub.title}</h3>
+              <p className="text-sm font-medium text-slate-500 mb-4">{pub.author}</p>
+              
+              <p className="text-sm text-muted-foreground mb-6 line-clamp-3 flex-1">{pub.summary}</p>
+              
+              <div className="flex items-center justify-between text-xs text-muted-foreground font-medium pt-4 border-t border-border mt-auto">
+                <div className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {format(new Date(pub.publishedDate), 'MMM yyyy')}</div>
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center gap-1"><Download className="w-3.5 h-3.5" /> {pub.downloadCount}</span>
+                </div>
+              </div>
+            </div>
+            
+            <Link href={`/publications/${pub.slug}`} className="absolute inset-0 z-10"><span className="sr-only">View {pub.title}</span></Link>
+          </div>
+        ))}
+      </div>
+
+      {publications.length === 0 && (
+        <div className="text-center py-24 bg-slate-50 dark:bg-slate-900 rounded-sm border border-border">
+          <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <h3 className="text-xl font-bold text-primary mb-2">No Resources Found</h3>
+          <p className="text-muted-foreground">Try adjusting your search criteria or removing filters.</p>
+        </div>
+      )}
     </div>
   );
 }

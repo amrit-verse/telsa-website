@@ -125,19 +125,47 @@ model EventRegistration {
   @@index([eventId])
 }
 
+enum PublicationType {
+  NOTES
+  RESEARCH_PAPER
+  LEGAL_ARTICLE
+  MOOT_COURT
+  REPORT
+  NOTICE
+}
+
+enum PublicationStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
 model Publication {
-  id          String   @id @default(cuid())
-  title       String
-  slug        String   @unique
-  category    String   // Notes, Research Papers, Legal Articles, Moot Court
-  fileUrl     String
-  isPublic    Boolean  @default(true)
+  id              String              @id @default(cuid())
+  title           String
+  slug            String              @unique
+  type            PublicationType
+  summary         String              @db.Text
+  content         String              @db.Text
   
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  fileUrl         String              
+  coverImageUrl   String?             
+  
+  author          String
+  publishedDate   DateTime            @default(now())
+  tags            String[]            
+  
+  status          PublicationStatus   @default(DRAFT)
+  
+  viewCount       Int                 @default(0)
+  downloadCount   Int                 @default(0)
+  
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
 
   @@index([slug])
-  @@index([createdAt])
+  @@index([type])
+  @@index([status])
 }
 
 model Gallery {
