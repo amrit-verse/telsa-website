@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  GUEST
+  MEMBER
+  ADMIN
+}
+
+enum MembershipStatus {
+  PENDING
+  ACTIVE
+  REJECTED
+  EXPIRED
+}
+
+enum MembershipType {
+  ORDINARY
+  LIFETIME
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  phone         String?
+  district      String?   
+  category      String?   // E.g., Madhesi, Muslim, Tharu
+  college       String?
+  course        String?
+  academicLevel String?
+  role          Role      @default(GUEST)
+  
+  membership    Membership?
+  committee     ExecutiveCommittee?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Membership {
+  id              String           @id @default(cuid())
+  userId          String           @unique
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type            MembershipType
+  status          MembershipStatus @default(PENDING)
+  paymentProofUrl String           // Screenshot upload URL
+  studentIdUrl    String?          // ID Card upload URL
+  district        String
+  expiryDate      DateTime?
+  appliedAt       DateTime         @default(now())
+  
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([status])
+}
+
+model ExecutiveCommittee {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position      String
+  priorityOrder Int      @default(99)
+  termStart     DateTime
+  termEnd       DateTime?
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  COMPLETED
+  CANCELLED
+}
+
+model Event {
+  id                  String       @id @default(cuid())
+  title               String
+  slug                String       @unique
+  category            String
+  shortDescription    String       @db.Text
+  description         String       @db.Text
+  startDate           DateTime
+  endDate             DateTime?
+  location            String
+  imageUrl            String?
+  
+  status              EventStatus  @default(DRAFT)
+  registrationRequired Boolean     @default(false)
+  registrationDeadline DateTime?
+  maxParticipants     Int?
+  
+  gallery             Gallery[]
+  registrations       EventRegistration[]
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([slug])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model EventRegistration {
+  id          String   @id @default(cuid())
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  name        String
+  email       String
+  phone       String
+  college     String
+  
+  createdAt   DateTime @default(now())
+  
+  @@unique([eventId, email])
+  @@index([eventId])
+}
+
+model Publication {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  category    String   // Notes, Research Papers, Legal Articles, Moot Court
+  fileUrl     String
+  isPublic    Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([createdAt])
+}
+
+model Gallery {
+  id          String   @id @default(cuid())
+  title       String
+  imageUrl    String
+  eventId     String?
+  event       Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+}
