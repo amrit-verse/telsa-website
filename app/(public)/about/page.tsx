@@ -1,6 +1,10 @@
 import { Metadata } from "next";
+<<<<<<< HEAD
 import { organization } from "@/lib/data/organization";
 import Link from "next/link";
+=======
+import Image from "next/image";
+>>>>>>> fac743c (Final release candidate polish)
 
 export const metadata: Metadata = {
   title: "History & Mandate | Terai Law Students Association",
@@ -35,6 +39,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+<<<<<<< HEAD
       {/* The Six Pillars */}
       <section className="mb-24">
         <h2 className="font-serif text-3xl font-bold text-primary mb-10 border-b border-border pb-4">Core Objectives</h2>
@@ -88,6 +93,28 @@ export default function AboutPage() {
           >
             Review the Constitution
           </Link>
+=======
+      {/* Origin Story / Organization info */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 className="font-serif text-3xl font-bold text-primary mb-6">Our Roots</h2>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            TeLSA was founded out of a critical need to amplify the voices of law students hailing from the 22 districts of the Terai region. We recognize the unique socio-legal challenges faced by these communities, including groups recognized by the Madhesi, Muslim, and Tharu commissions.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            From our headquarters in Kaski, we coordinate national efforts to ensure that geography and background are never barriers to legal excellence and justice.
+          </p>
+        </div>
+        <div className="bg-slate-100 dark:bg-slate-900 rounded-sm p-8 border border-border flex items-center justify-center min-h-[300px] relative overflow-hidden group">
+          <Image
+            src="/images/events/IMG-20260609-WA0023.jpg"
+            alt="TeLSA Members Assembly"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300"></div>
+>>>>>>> fac743c (Final release candidate polish)
         </div>
       </section>
     </div>

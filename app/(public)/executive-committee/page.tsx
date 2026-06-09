@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { committeeMembers } from "@/lib/data/committee";
 
 export const metadata: Metadata = {
@@ -26,12 +27,23 @@ export default function ExecutiveCommitteePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
           {coreMembers.map((member, index) => (
             <div key={index} className="bg-card border border-border rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-              {/* Typographic Monogram Fallback */}
-              <div className="w-full h-64 bg-primary flex items-center justify-center relative overflow-hidden">
-                <span className="font-serif text-6xl text-primary-foreground font-bold tracking-widest">{member.name.charAt(0)}</span>
-                {/* Subtle gradient overlay to match aesthetic */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              </div>
+              {member.image ? (
+                <div className="w-full h-64 relative bg-slate-100 dark:bg-slate-800">
+                  <Image 
+                    src={member.image} 
+                    alt={`${member.name} - ${member.position}`}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                </div>
+              ) : (
+                <div className="w-full h-64 bg-primary flex items-center justify-center relative overflow-hidden">
+                  <span className="font-serif text-6xl text-primary-foreground font-bold tracking-widest">{member.name.charAt(0)}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
+              )}
               <div className="p-6 text-center border-t-2 border-secondary/20 group-hover:border-secondary transition-colors">
                 <h3 className="font-serif text-xl font-bold text-primary mb-1">{member.name}</h3>
                 <p className="text-secondary font-semibold text-sm tracking-wide uppercase">{member.position}</p>
@@ -47,8 +59,18 @@ export default function ExecutiveCommitteePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {execMembers.map((member, index) => (
             <div key={index} className="bg-card border border-border p-6 rounded-sm text-center shadow-sm hover:border-secondary/50 transition-colors">
-              <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4 border border-primary/20">
-                <span className="font-serif text-2xl font-bold text-primary">{member.name.charAt(0)}</span>
+              <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4 border border-primary/20 relative overflow-hidden">
+                {member.image ? (
+                  <Image
+                    src={member.image}
+                    alt={`${member.name} - ${member.position}`}
+                    fill
+                    className="object-cover object-top"
+                    sizes="80px"
+                  />
+                ) : (
+                  <span className="font-serif text-2xl font-bold text-primary">{member.name.charAt(0)}</span>
+                )}
               </div>
               <h3 className="font-serif text-lg font-bold text-primary mb-1">{member.name}</h3>
               <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">{member.position}</p>

@@ -4,7 +4,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { ChevronLeft, Download, FileText, User, Calendar, Eye, Tags } from "lucide-react";
+import { ChevronLeft, User, Calendar, Eye, Tags } from "lucide-react";
 import { format } from "date-fns";
 import DownloadTracker from "@/components/publications/download-tracker"; // We will create this client component
 
@@ -13,8 +13,7 @@ type Props = {
 }
 
 export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
+  { params }: Props
 ): Promise<Metadata> {
   const resolvedParams = await params;
   const pub = await prisma.publication.findUnique({ where: { slug: resolvedParams.slug, status: "PUBLISHED" } });

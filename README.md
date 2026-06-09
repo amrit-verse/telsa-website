@@ -104,6 +104,7 @@ The project requires the following environment variables to function correctly.
 | `DATABASE_URL` | PostgreSQL connection string | `postgresql://user:pass@localhost:5432/telsa_db` |
 | `AUTH_SECRET` | Secret string for Auth.js sessions | `generated-via-openssl` |
 | `NEXTAUTH_URL` | Base URL of your application | `http://localhost:3000` |
+| `BOOTSTRAP_SECRET` | Secret token to bootstrap first SUPER_ADMIN via API | `your_bootstrap_secret` |
 | `CLOUDINARY_CLOUD_NAME`| Cloudinary account cloud name | `your_cloud_name` |
 | `CLOUDINARY_API_KEY` | Cloudinary API key | `your_api_key` |
 | `CLOUDINARY_API_SECRET`| Cloudinary API secret | `your_api_secret` |
