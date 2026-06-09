@@ -12,10 +12,10 @@ export default function ExecutiveCommitteePage() {
   const execMembers = committeeMembers.filter(m => m.roleType === "executive");
 
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 max-w-6xl">
-      <div className="mb-16 text-center">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">Executive Committee</h1>
-        <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
+    <div className="container mx-auto px-4 md:px-8 py-10 md:py-16 max-w-6xl">
+      <div className="mb-12 md:mb-16 text-center">
+        <h1 className="font-serif text-3xl md:text-5xl font-bold text-primary mb-4 md:mb-6">Executive Committee</h1>
+        <div className="w-16 md:w-24 h-px md:h-1 bg-secondary mx-auto mb-6 md:mb-8"></div>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           The dedicated leadership team guiding the Terai Law Students&apos; Association towards its mission of legal literacy, unity, and student empowerment.
         </p>
@@ -44,9 +44,9 @@ export default function ExecutiveCommitteePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
               )}
-              <div className="p-6 text-center border-t-2 border-secondary/20 group-hover:border-secondary transition-colors">
-                <h3 className="font-serif text-xl font-bold text-primary mb-1">{member.name}</h3>
-                <p className="text-secondary font-semibold text-sm tracking-wide uppercase">{member.position}</p>
+              <div className="p-4 md:p-6 text-center border-t-2 border-border transition-colors">
+                <h3 className="font-serif text-lg md:text-xl font-bold text-primary mb-1">{member.name}</h3>
+                <p className="text-secondary font-semibold text-xs md:text-sm tracking-wide uppercase">{member.position}</p>
               </div>
             </div>
           ))}
@@ -58,7 +58,7 @@ export default function ExecutiveCommitteePage() {
         <h2 className="font-serif text-3xl font-bold text-center text-primary mb-12">Executive Members</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {execMembers.map((member, index) => (
-            <div key={index} className="bg-card border border-border p-6 rounded-sm text-center shadow-sm hover:border-secondary/50 transition-colors">
+            <div key={index} className="bg-card border border-border p-6 rounded-sm text-center shadow-sm transition-shadow hover:shadow-md">
               <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4 border border-primary/20 relative overflow-hidden">
                 {member.image ? (
                   <Image
@@ -72,8 +72,8 @@ export default function ExecutiveCommitteePage() {
                   <span className="font-serif text-2xl font-bold text-primary">{member.name.charAt(0)}</span>
                 )}
               </div>
-              <h3 className="font-serif text-lg font-bold text-primary mb-1">{member.name}</h3>
-              <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">{member.position}</p>
+              <h3 className="font-serif text-base md:text-lg font-bold text-primary mb-1">{member.name}</h3>
+              <p className="text-muted-foreground text-[10px] md:text-xs font-medium uppercase tracking-wider">{member.position}</p>
             </div>
           ))}
         </div>

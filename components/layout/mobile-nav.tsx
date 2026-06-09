@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { publicNavigation } from "@/lib/data/navigation";
@@ -20,10 +21,35 @@ export default function MobileNav() {
           <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
         </svg>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[300px] sm:w-[400px] flex flex-col">
+      <SheetContent side="right" className="w-[300px] sm:w-[400px] flex flex-col p-0 h-[100dvh] max-h-[100dvh] justify-between overflow-hidden">
         <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
         <SheetDescription className="sr-only">Links to navigate the TeLSA public website.</SheetDescription>
-        <nav className="flex flex-col gap-6 mt-8 flex-1">
+        
+        {/* Institutional Identity Block */}
+        <div className="flex flex-col items-center text-center p-6 bg-slate-50 dark:bg-slate-900 border-b border-border shrink-0">
+          <div className="relative w-16 h-16 mb-3 bg-white border border-border shadow-sm p-1 shrink-0">
+            <Image 
+              src="/images/telsa-logo.jpeg" 
+              alt="TeLSA Official Logo" 
+              fill
+              className="object-contain p-1"
+              sizes="80px"
+              priority
+            />
+          </div>
+          <h2 className="font-serif text-lg leading-tight text-primary dark:text-primary-foreground mt-1">
+            Terai Law Students&apos; Association
+          </h2>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium mt-1">
+            Prithvi Narayan Campus
+          </p>
+          <p className="text-[10px] uppercase tracking-widest text-secondary font-bold mt-1">
+            Established 2080 B.S.
+          </p>
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="flex flex-col px-6 py-2 flex-1 justify-center">
           {publicNavigation.map((link) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
             return (
@@ -31,31 +57,39 @@ export default function MobileNav() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`text-lg font-medium transition-colors ${
-                  isActive ? "text-secondary font-bold" : "text-foreground hover:text-secondary"
+                className={`py-2.5 text-base font-serif transition-colors border-b border-border/50 last:border-0 ${
+                  isActive ? "text-secondary font-bold" : "text-primary/80 dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground"
                 }`}
               >
                 {link.name}
               </Link>
             );
           })}
-          <div className="border-t pt-6 mt-auto flex flex-col gap-4 mb-8">
+
+          <div className="mt-4 pt-4 border-t border-border flex flex-col gap-3">
             <Link 
               href="/join" 
               onClick={() => setOpen(false)}
-              className="inline-flex h-12 items-center justify-center rounded-sm bg-secondary px-6 text-base font-medium text-secondary-foreground shadow hover:bg-secondary/90 transition-colors"
+              className="inline-flex h-12 items-center justify-center bg-primary border border-primary text-sm font-bold tracking-widest uppercase text-primary-foreground hover:bg-primary/90 transition-colors"
             >
-              Join TeLSA
+              Membership Application
             </Link>
             <Link 
               href="/login" 
               onClick={() => setOpen(false)}
-              className="text-base font-medium text-muted-foreground hover:text-foreground text-center py-2"
+              className="inline-flex h-12 items-center justify-center bg-transparent border border-primary text-sm font-bold tracking-widest uppercase text-primary hover:bg-primary/5 transition-colors"
             >
-              Member Login
+              Member Portal
             </Link>
           </div>
         </nav>
+
+        {/* Institutional Footer */}
+        <div className="p-4 bg-primary text-primary-foreground text-center shrink-0">
+          <p className="text-[10px] font-medium tracking-widest uppercase text-primary-foreground/70">
+            Established 2080 B.S. • Pokhara, Nepal
+          </p>
+        </div>
       </SheetContent>
     </Sheet>
   );

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { organization } from "@/lib/data/organization";
 import Link from "next/link";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "History & Mandate | Terai Law Students Association",
@@ -10,9 +9,9 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 md:py-24 max-w-4xl">
+    <div className="container mx-auto px-4 md:px-8 py-10 md:py-24 max-w-4xl">
       {/* Institutional Header */}
-      <div className="mb-20 text-center border-b border-border pb-12">
+      <div className="mb-12 md:mb-20 text-center border-b border-border pb-8 md:pb-12">
         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-6">History & Mandate</h1>
         <div className="w-16 h-px bg-secondary mx-auto mb-8"></div>
         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto font-light">
@@ -85,33 +84,64 @@ export default function AboutPage() {
           </p>
           <Link 
             href="/about/constitution" 
-            className="inline-flex h-10 items-center justify-center border border-primary px-8 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-secondary"
+            className="inline-flex h-12 md:h-10 items-center justify-center border border-primary px-8 text-sm font-bold tracking-widest uppercase text-primary hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-secondary"
           >
             Review the Constitution
           </Link>
         </div>
       </section>
 
-      {/* Origin Story / Organization info */}
-      <section className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 className="font-serif text-3xl font-bold text-primary mb-6">Our Roots</h2>
-          <p className="text-muted-foreground leading-relaxed mb-4">
-            TeLSA was founded out of a critical need to amplify the voices of law students hailing from the 22 districts of the Terai region. We recognize the unique socio-legal challenges faced by these communities, including groups recognized by the Madhesi, Muslim, and Tharu commissions.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            From our headquarters in Kaski, we coordinate national efforts to ensure that geography and background are never barriers to legal excellence and justice.
-          </p>
-        </div>
-        <div className="bg-slate-100 dark:bg-slate-900 rounded-sm p-8 border border-border flex items-center justify-center min-h-[300px] relative overflow-hidden group">
-          <Image
-            src="/images/events/IMG-20260609-WA0023.jpg"
-            alt="TeLSA Members Assembly"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300"></div>
+      {/* Organizational Timeline */}
+      <section className="mt-24">
+        <h2 className="font-serif text-3xl font-bold text-primary mb-10 border-b border-border pb-4">Organizational Timeline</h2>
+        
+        <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent">
+          
+          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-primary text-secondary shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+              <span className="font-serif text-sm font-bold">I</span>
+            </div>
+            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-sm border border-border bg-card shadow-sm">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-serif text-lg font-bold text-primary">Inception</span>
+                <span className="font-mono text-sm text-secondary font-medium tracking-wider">2080 B.S.</span>
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                TeLSA was formally established at Prithvi Narayan Campus by visionary law students from the 22 Terai districts to secure a collective representative voice.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-slate-100 dark:bg-slate-800 text-primary shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+              <span className="font-serif text-sm font-bold">II</span>
+            </div>
+            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-sm border border-border bg-card shadow-sm">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-serif text-lg font-bold text-primary">First General Assembly</span>
+                <span className="font-mono text-sm text-secondary font-medium tracking-wider">2081 B.S.</span>
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                The inaugural General Assembly ratified the official constitution, electing the first unified Executive Committee to lead the association&apos;s legal mandates.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-slate-100 dark:bg-slate-800 text-primary shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+              <span className="font-serif text-sm font-bold">III</span>
+            </div>
+            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-sm border border-border bg-card shadow-sm">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-serif text-lg font-bold text-primary">Digital Transformation</span>
+                <span className="font-mono text-sm text-secondary font-medium tracking-wider">Present</span>
+              </div>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Launch of the official TeLSA Management Platform, establishing an enduring digital archive for events, publications, and institutional memory.
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
     </div>

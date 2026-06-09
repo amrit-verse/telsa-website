@@ -42,10 +42,10 @@ export default async function PublicPublicationsPage({
   });
 
   return (
-    <div className="container mx-auto px-4 py-16 max-w-6xl">
-      <div className="text-center mb-16">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-4">Resource Library</h1>
-        <div className="w-24 h-1 bg-secondary mx-auto mb-6"></div>
+    <div className="container mx-auto px-4 py-10 md:py-16 max-w-6xl">
+      <div className="text-center mb-12 md:mb-16">
+        <h1 className="font-serif text-3xl md:text-5xl font-bold text-primary mb-4">Resource Library</h1>
+        <div className="w-16 md:w-24 h-px md:h-1 bg-secondary mx-auto mb-6"></div>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           TeLSA&apos;s open academic repository. Access research papers, comprehensive notes, and legal articles authored by students and professionals.
         </p>
@@ -65,21 +65,21 @@ export default async function PublicPublicationsPage({
           {typeFilter && <input type="hidden" name="type" value={typeFilter} />}
         </form>
         
-        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
-          <Link href="/publications" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${!typeFilter ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>All Resources</Link>
-          <Link href="/publications?type=RESEARCH_PAPER" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${typeFilter === 'RESEARCH_PAPER' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Research Papers</Link>
-          <Link href="/publications?type=NOTES" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${typeFilter === 'NOTES' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Notes</Link>
-          <Link href="/publications?type=LEGAL_ARTICLE" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-sm font-bold ${typeFilter === 'LEGAL_ARTICLE' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Articles</Link>
+        <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+          <Link href="/publications" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-xs md:text-sm font-bold ${!typeFilter ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>All Resources</Link>
+          <Link href="/publications?type=RESEARCH_PAPER" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-xs md:text-sm font-bold ${typeFilter === 'RESEARCH_PAPER' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Research Papers</Link>
+          <Link href="/publications?type=NOTES" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-xs md:text-sm font-bold ${typeFilter === 'NOTES' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Notes</Link>
+          <Link href="/publications?type=LEGAL_ARTICLE" className={`px-4 py-3 border rounded-sm whitespace-nowrap text-xs md:text-sm font-bold ${typeFilter === 'LEGAL_ARTICLE' ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-slate-50'}`}>Articles</Link>
         </div>
       </div>
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {publications.map(pub => (
-          <div key={pub.id} className="bg-card border border-border rounded-sm shadow-sm flex flex-col transition-transform hover:-translate-y-1 hover:shadow-md overflow-hidden group">
+          <div key={pub.id} className="bg-card border border-border rounded-sm shadow-sm flex flex-col hover:shadow-md transition-shadow overflow-hidden group">
             {pub.coverImageUrl ? (
               <div className="relative h-48 w-full bg-slate-100 border-b border-border overflow-hidden">
-                <Image src={pub.coverImageUrl} alt={pub.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                <Image src={pub.coverImageUrl} alt={pub.title} fill className="object-cover" />
               </div>
             ) : (
               <div className="h-48 w-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-muted-foreground border-b border-border">
@@ -110,7 +110,7 @@ export default async function PublicPublicationsPage({
       </div>
 
       {publications.length === 0 && (
-        <div className="text-center py-24 bg-slate-50 dark:bg-slate-900/50 rounded-sm border border-border shadow-sm max-w-3xl mx-auto">
+        <div className="text-center py-16 md:py-24 bg-slate-50 dark:bg-slate-900/50 rounded-sm border border-border shadow-sm max-w-3xl mx-auto px-4">
           <div className="w-20 h-20 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-6">
             <BookOpen className="w-10 h-10 text-primary opacity-80" />
           </div>

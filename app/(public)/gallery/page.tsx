@@ -33,16 +33,16 @@ const eventImages = [
 
 export default function GalleryPage() {
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 max-w-6xl">
-      <div className="mb-16 text-center">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">Event Gallery</h1>
-        <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
+    <div className="container mx-auto px-4 md:px-8 py-10 md:py-16 max-w-6xl">
+      <div className="mb-12 md:mb-16 text-center">
+        <h1 className="font-serif text-3xl md:text-5xl font-bold text-primary mb-4 md:mb-6">Event Gallery</h1>
+        <div className="w-16 md:w-24 h-px md:h-1 bg-secondary mx-auto mb-6 md:mb-8"></div>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           A visual journey through our legal awareness campaigns, academic competitions, and community programs.
         </p>
       </div>
 
-      <h3 className="font-serif text-2xl font-bold text-primary mb-8 border-b pb-4">TeLSA Events & Activities</h3>
+      <h3 className="font-serif text-2xl font-bold text-primary mb-6 md:mb-8 border-b pb-4">TeLSA Events & Activities</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {eventImages.map((img, index) => (
           <div key={index} className="relative aspect-[4/3] bg-slate-200 dark:bg-slate-800 rounded-sm overflow-hidden group shadow-sm hover:shadow-md transition-shadow">
@@ -50,10 +50,9 @@ export default function GalleryPage() {
               src={`/images/events/${img}`}
               alt={`TeLSA Event Activity ${index + 1}`}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
-            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
         ))}
       </div>

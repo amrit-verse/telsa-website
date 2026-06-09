@@ -2,87 +2,179 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { organization } from "@/lib/data/organization";
-import { getPresident } from "@/lib/data/committee";
+import { committeeMembers, getPresident } from "@/lib/data/committee";
+import { db } from "@/lib/db";
+import { format } from "date-fns";
 
 export const metadata: Metadata = {
-  title: "Home | Terai Law Students' Association",
-  description: "Protecting students' rights and promoting legal literacy among Terai/Madhesh law students in Nepal.",
+  title: "Official Homepage | Terai Law Students' Association",
+  description: "Official representative body for Terai-origin law students at Prithvi Narayan Campus.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
   const president = getPresident();
+  const coreMembers = committeeMembers.filter(m => m.roleType === "core" && m.position !== "President");
+  const execMembers = committeeMembers.filter(m => m.roleType === "executive");
+  
+  // Fetch real notices and events instead of static placeholders
+  const dbNotices = await db.publication.findMany({
+    where: { status: 'PUBLISHED', type: 'NOTICE' },
+    orderBy: { publishedDate: 'desc' },
+    take: 3,
+  });
+
+  const dbEvents = await db.event.findMany({
+    where: { status: 'PUBLISHED' },
+    orderBy: { startDate: 'desc' },
+    take: 2,
+  });
+
+  const notices = [
+    ...dbNotices.map(n => ({
+      date: format(new Date(n.publishedDate), 'yyyy-MM-dd'),
+      title: n.title,
+      link: `/publications/${n.slug}`,
+      isNotice: true
+    })),
+    ...dbEvents.map(e => ({
+      date: format(new Date(e.startDate), 'yyyy-MM-dd'),
+      title: e.title,
+      link: `/events/${e.slug}`,
+      isNotice: false
+    }))
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative w-full bg-primary py-24 md:py-32 border-b border-primary/20">
-        <div className="container relative mx-auto px-4 md:px-8 text-center text-primary-foreground">
-          <span className="inline-block py-1 px-3 rounded-sm bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-8">
-            Est. {organization.established} | Kaski, Nepal
-          </span>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mb-6 max-w-5xl mx-auto leading-tight text-white">
-            Advancing Legal Scholarship & Advocacy at Prithvi Narayan Campus.
-          </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/80 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
-            The Terai Law Students Association serves as the definitive representative body for Terai-origin scholars, dedicated to academic rigor and the uncompromising defense of student rights.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link 
-              href="/join" 
-              className="w-full sm:w-auto h-12 inline-flex items-center justify-center rounded-sm bg-secondary px-8 text-base font-medium text-secondary-foreground shadow-sm hover:bg-secondary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
-            >
-              Become a Member
-            </Link>
-            <Link 
-              href="/about" 
-              className="w-full sm:w-auto h-12 inline-flex items-center justify-center rounded-sm bg-transparent border border-primary-foreground/30 px-8 text-base font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary"
-            >
-              Learn More
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* About TeLSA Section */}
-      <section className="py-20 md:py-28 bg-background border-b border-border">
-        <div className="container mx-auto px-6 md:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-6">About TeLSA</h2>
-            <div className="w-16 h-1 bg-secondary mx-auto mb-10"></div>
-            <p className="text-lg md:text-xl text-muted-foreground leading-loose">
-              Terai Law Students Association (TeLSA) is a student-led organization representing Terai-origin law students studying at Prithvi Narayan Campus, Pokhara. Established in 2080 B.S., TeLSA promotes unity, academic excellence, leadership, and social responsibility. Through legal awareness programs, moot court activities, research initiatives, cultural events, and community engagement, the association empowers students while preserving the rich cultural heritage of the Terai region.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* President's Message Section */}
-      {president && (
-        <section className="py-20 bg-slate-50 dark:bg-slate-900 border-b border-border">
-          <div className="container mx-auto px-4 md:px-8">
-            <div className="max-w-4xl mx-auto bg-card border border-border p-8 md:p-12 rounded-sm shadow-sm flex flex-col md:flex-row gap-8 items-center">
-              <div className="shrink-0 w-48 h-48 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-background shadow-md overflow-hidden flex items-center justify-center relative">
-                {president.image ? (
-                  <Image 
-                    src={president.image} 
-                    alt={president.name} 
-                    fill 
-                    className="object-cover object-top" 
-                    sizes="192px" 
-                  />
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground opacity-50"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                )}
+      {/* Formal Header/Hero */}
+      <section className="w-full bg-white dark:bg-slate-950 py-16 md:py-20 lg:py-32 border-b-2 border-primary relative overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-16">
+            <div className="w-full lg:w-3/5 xl:w-2/3 max-w-4xl z-10 pt-4">
+              <div className="mb-8 flex flex-col gap-2">
+                <span className="text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-secondary">
+                  {organization.location}
+                </span>
+                <span className="text-[10px] md:text-xs font-medium tracking-widest text-muted-foreground uppercase">
+                  Established {organization.established}
+                </span>
               </div>
-              <div className="flex-1 text-center md:text-left">
-                <h2 className="font-serif text-2xl font-bold text-primary mb-2">Message from the Leadership</h2>
-                <div className="w-16 h-1 bg-secondary mx-auto md:mx-0 mb-6"></div>
-                <blockquote className="text-lg italic text-muted-foreground leading-relaxed mb-6">
-                  &quot;{president.message}&quot;
-                </blockquote>
-                <div>
-                  <h3 className="font-bold text-primary">{president.name}</h3>
-                  <p className="text-sm text-secondary font-semibold uppercase tracking-wider">{president.position}, {organization.shortName}</p>
+              
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-normal mb-8 leading-tight md:leading-none text-primary dark:text-primary-foreground tracking-tight break-words">
+                Terai Law Students&apos; Association
+              </h1>
+              
+              <div className="w-full max-w-2xl h-px bg-border mb-10"></div>
+              
+              <p className="text-lg sm:text-xl md:text-3xl text-primary/80 dark:text-primary-foreground/80 max-w-3xl leading-relaxed font-serif">
+                The definitive representative body dedicated to academic rigor, student advocacy, and the uncompromising defense of legal rights at Prithvi Narayan Campus.
+              </p>
+            </div>
+            
+            <div className="w-full lg:w-2/5 xl:w-1/3 flex justify-center lg:justify-end z-0">
+              <div className="relative w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-full aspect-[4/3] lg:aspect-square opacity-[0.92]">
+                <Image
+                  src="/images/map.png"
+                  alt="Map of Nepal"
+                  fill
+                  priority
+                  className="object-contain object-center lg:object-right"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Official Notices */}
+      <section className="py-16 bg-slate-50 dark:bg-slate-900 border-b border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-4">
+              <h2 className="font-serif text-3xl font-normal text-primary mb-2 border-l-4 border-secondary pl-4">
+                Official Notices
+              </h2>
+              <p className="text-muted-foreground mt-4 text-sm leading-relaxed pl-5 font-serif">
+                Announcements, formal proceedings, and scheduled assemblies of the Association.
+              </p>
+            </div>
+            <div className="lg:col-span-8">
+              <div className="border-t-2 border-primary">
+                {notices.length > 0 ? notices.map((notice, i) => (
+                  <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between py-4 sm:py-5 border-b border-border hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors px-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 w-full">
+                      <time className="font-mono text-xs sm:text-sm text-secondary font-medium tracking-wider w-32 shrink-0">
+                        {notice.date}
+                      </time>
+                      <Link href={notice.link} className="font-serif font-medium text-base sm:text-lg text-primary dark:text-primary-foreground hover:underline w-full leading-snug">
+                        {notice.title}
+                      </Link>
+                    </div>
+                  </div>
+                )) : (
+                  <div className="py-8 px-4 text-center border-b border-border">
+                    <p className="text-muted-foreground font-serif">No official notices or events are currently scheduled.</p>
+                  </div>
+                )}
+                <div className="pt-6 text-right">
+                  <Link href="/publications" className="text-xs font-semibold tracking-[0.2em] uppercase text-secondary hover:underline">
+                    View All Records &rarr;
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* From the Desk of the President */}
+      {president && (
+        <section className="py-16 md:py-24 bg-white dark:bg-slate-950 border-b border-border">
+          <div className="container mx-auto px-4 md:px-8">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 md:gap-16 items-start">
+              <div className="w-full md:w-1/3 shrink-0">
+                <div className="border border-border/50 p-4 bg-white dark:bg-slate-950 shadow-sm">
+                  <div className="relative aspect-[3/4] w-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-border/20">
+                    {president.image ? (
+                      <Image 
+                        src={president.image} 
+                        alt={president.name} 
+                        fill 
+                        className="object-cover object-top" 
+                        sizes="(max-width: 768px) 100vw, 33vw" 
+                      />
+                    ) : (
+                      <span className="font-serif text-muted-foreground text-sm uppercase tracking-widest">Portrait Unavailable</span>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-8 text-center border-b border-border pb-6">
+                  <h3 className="font-serif text-2xl font-medium text-primary">{president.name}</h3>
+                  <p className="text-xs text-secondary font-bold uppercase tracking-[0.2em] mt-2">
+                    President, {organization.shortName}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="w-full md:w-2/3 md:pt-4">
+                <h2 className="font-serif text-3xl md:text-4xl font-normal text-primary mb-6 md:mb-8 border-b-2 border-secondary inline-block pb-3">
+                  From the Desk of the President
+                </h2>
+                <div className="prose prose-lg dark:prose-invert prose-headings:font-serif prose-p:font-serif prose-p:leading-loose text-primary/90 dark:text-primary-foreground/90 max-w-none">
+                  <p className="first-letter:text-5xl first-letter:font-serif first-letter:text-secondary first-letter:mr-3 first-letter:float-left first-letter:leading-none">
+                    {president.message || "An official address from the President will be documented here shortly. The Terai Law Students' Association remains steadfast in its commitment to the rule of law and the academic prosperity of its members."}
+                  </p>
+                  <p>
+                    We recognize the unique challenges faced by law scholars from the Terai region and operate as a united front to champion equity within the Faculty of Law at Prithvi Narayan Campus. Through rigorous moot court preparations, legal aid initiatives, and continuous academic advocacy, we ensure our members are equipped not just as students, but as future custodians of justice.
+                  </p>
+                  <p className="italic mt-10 text-xl font-serif">
+                    In solidarity and service,
+                  </p>
+                  <div className="mt-8 border-t border-border/50 pt-6 w-48">
+                    <span className="block font-serif text-xl text-primary">{president.name}</span>
+                    <span className="block text-xs uppercase tracking-widest text-muted-foreground mt-2">President</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -90,64 +182,82 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* Mission Highlights Section */}
-      <section className="py-20 bg-background">
+      {/* Executive Committee Grid */}
+      <section className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-4">Our Core Mission</h2>
-            <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
-            <p className="text-muted-foreground max-w-2xl mx-auto">We are dedicated to fostering a supportive community and advancing legal excellence.</p>
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="font-serif text-3xl md:text-4xl font-normal text-primary mb-4 md:mb-6">The Executive Committee</h2>
+            <div className="w-24 h-px bg-secondary mx-auto"></div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-card border border-border p-8 rounded-sm shadow-sm flex flex-col items-center text-center focus-within:ring-2 focus-within:ring-secondary transition-shadow hover:shadow-md">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <h3 className="font-serif text-xl font-bold mb-3 text-primary">Protecting Rights</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Safeguarding the rights and interests of law students, ensuring a fair and equitable academic environment.
-              </p>
+          
+          <div className="max-w-6xl mx-auto">
+            <h3 className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-8 border-b border-border pb-4">Core Leadership</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 md:gap-y-12 mb-12 md:mb-16">
+              {coreMembers.map((member, idx) => (
+                <div key={idx} className="flex flex-col border-t-2 border-primary/20 pt-4 hover:border-secondary transition-colors">
+                  <h4 className="font-serif text-lg md:text-xl font-medium text-primary mb-1">{member.name}</h4>
+                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-secondary">
+                    {member.position}
+                  </p>
+                </div>
+              ))}
             </div>
 
-            {/* Feature 2 */}
-            <div className="bg-card border border-border p-8 rounded-sm shadow-sm flex flex-col items-center text-center focus-within:ring-2 focus-within:ring-secondary transition-shadow hover:shadow-md">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-              </div>
-              <h3 className="font-serif text-xl font-bold mb-3 text-primary">Legal Literacy</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Conducting awareness programs, research, and publications to enhance legal literacy across communities.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-card border border-border p-8 rounded-sm shadow-sm flex flex-col items-center text-center focus-within:ring-2 focus-within:ring-secondary transition-shadow hover:shadow-md">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              </div>
-              <h3 className="font-serif text-xl font-bold mb-3 text-primary">Student Unity</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Fostering unity and leadership development among Terai/Madhesh law students through collaborative activities.
-              </p>
+            <h3 className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-8 border-b border-border pb-4">Executive Members</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 md:gap-y-12">
+              {execMembers.map((member, idx) => (
+                <div key={idx} className="flex flex-col border-t border-border pt-4 hover:border-secondary transition-colors">
+                  <h4 className="font-serif text-base md:text-lg font-medium text-primary mb-1">{member.name}</h4>
+                  <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                    {member.position}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Latest Events Teaser */}
-      <section className="py-24 bg-white dark:bg-slate-950 border-y border-border">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-6">Recent Proceedings</h2>
-          <div className="w-16 h-px bg-secondary mx-auto mb-8"></div>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-12 text-lg">Examine the records of our latest moot court competitions, legal awareness campaigns, and formal assemblies.</p>
-          <Link 
-            href="/events" 
-            className="inline-flex h-12 items-center justify-center rounded-sm bg-transparent border border-primary px-8 text-sm font-medium text-primary hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
-          >
-            Access Event Archive
-          </Link>
+      {/* Membership & Governance */}
+      <section className="py-16 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%,transparent_100%)] bg-[length:20px_20px]"></div>
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto border border-primary-foreground/20 p-6 md:p-16 relative bg-primary">
+            {/* Decorative corners */}
+            <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-secondary"></div>
+            <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-secondary"></div>
+            <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-secondary"></div>
+            <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-secondary"></div>
+            
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal mb-6 md:mb-8">Membership Protocol</h2>
+              <div className="w-16 md:w-24 h-px bg-secondary mx-auto"></div>
+            </div>
+            
+            <div className="space-y-8 font-serif text-xl leading-relaxed text-primary-foreground/90 text-center max-w-2xl mx-auto">
+              <p>
+                Membership to the Terai Law Students&apos; Association is granted exclusively to scholars currently enrolled in the Faculty of Law at Prithvi Narayan Campus.
+              </p>
+              <p>
+                Candidates must demonstrate an unwavering commitment to the association&apos;s constitution, academic integrity, and the collective advancement of the legal fraternity.
+              </p>
+            </div>
+            
+            <div className="mt-12 md:mt-16 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+              <Link 
+                href="/join" 
+                className="inline-flex h-12 md:h-14 items-center justify-center bg-secondary px-8 md:px-10 text-[10px] md:text-sm font-bold tracking-widest uppercase text-secondary-foreground hover:bg-white transition-colors"
+              >
+                Access Application
+              </Link>
+              <Link 
+                href="/about" 
+                className="inline-flex h-12 md:h-14 items-center justify-center bg-transparent border border-primary-foreground/30 px-8 md:px-10 text-[10px] md:text-sm font-bold tracking-widest uppercase text-white hover:bg-primary-foreground/10 transition-colors"
+              >
+                Read Constitution
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </>

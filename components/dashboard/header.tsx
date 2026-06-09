@@ -47,13 +47,13 @@ export default function DashboardHeader() {
           </SheetContent>
         </Sheet>
 
-        {/* Global Search Placeholder */}
-        <div className="hidden sm:flex items-center relative w-72">
+        {/* Global Search - Upcoming Feature */}
+        <div className="hidden sm:flex items-center relative w-72" title="Global search is coming soon">
           <Search className="w-4 h-4 absolute left-3 text-muted-foreground" aria-hidden="true" />
           <input 
             type="text" 
-            placeholder="Search members, events, publications..." 
-            className="w-full pl-9 pr-4 py-1.5 text-sm bg-slate-100 dark:bg-slate-900 border border-transparent rounded-sm focus:outline-none focus:border-border focus:ring-1 focus:ring-secondary"
+            placeholder="Search coming soon..." 
+            className="w-full pl-9 pr-4 py-1.5 text-sm bg-slate-100 dark:bg-slate-900 border border-transparent rounded-sm focus:outline-none focus:border-border focus:ring-1 focus:ring-secondary cursor-not-allowed opacity-70"
             disabled
           />
         </div>

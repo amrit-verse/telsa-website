@@ -8,20 +8,20 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="container mx-auto px-4 md:px-8 py-16 max-w-6xl">
-      <div className="mb-16 text-center">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold text-primary mb-6">Contact Us</h1>
-        <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
+    <div className="container mx-auto px-4 md:px-8 py-10 md:py-16 max-w-6xl">
+      <div className="mb-12 md:mb-16 text-center">
+        <h1 className="font-serif text-3xl md:text-5xl font-bold text-primary mb-4 md:mb-6">Contact Us</h1>
+        <div className="w-16 md:w-24 h-px md:h-1 bg-secondary mx-auto mb-6 md:mb-8"></div>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Have questions about membership, events, or our initiatives? We are here to help. Reach out to the {organization.shortName} executive team.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
         {/* Contact Info & Map */}
         <div>
-          <h2 className="font-serif text-3xl font-bold text-primary mb-8">Official Information</h2>
-          <div className="space-y-8 mb-12">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary mb-6 md:mb-8">Official Information</h2>
+          <div className="space-y-6 md:space-y-8 mb-10 md:mb-12">
             <div className="flex gap-4">
               <div className="w-12 h-12 border border-secondary/20 bg-primary/5 flex items-center justify-center text-secondary shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -72,8 +72,8 @@ export default function ContactPage() {
         </div>
 
         {/* Contact CTA UI */}
-        <div className="bg-card border border-border p-8 md:p-12 flex flex-col justify-center">
-          <h2 className="font-serif text-3xl font-bold text-primary mb-6">Get in Touch</h2>
+        <div className="bg-card border border-border p-6 md:p-12 flex flex-col justify-center">
+          <h2 className="font-serif text-2xl md:text-3xl font-bold text-primary mb-6">Get in Touch</h2>
           <p className="text-muted-foreground leading-relaxed mb-8">
             The TeLSA executive committee is available to assist students with membership inquiries, event participation, and general support. We typically respond within 1-2 business days.
           </p>

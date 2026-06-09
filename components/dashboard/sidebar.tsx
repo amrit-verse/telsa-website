@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, 
@@ -29,7 +30,9 @@ export default function DashboardSidebar() {
     <aside className="hidden md:flex w-64 flex-col border-r bg-card h-screen sticky top-0 shadow-sm z-10">
       <div className="h-16 flex items-center px-6 border-b">
         <Link href="/" className="font-serif font-bold text-xl text-primary flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">T</div>
+          <div className="relative w-8 h-8 rounded-sm overflow-hidden bg-white border border-border shrink-0">
+            <Image src="/images/telsa-logo.jpeg" alt="TeLSA Logo" fill className="object-contain" sizes="32px" />
+          </div>
           TeLSA Admin
         </Link>
       </div>

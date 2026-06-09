@@ -12,7 +12,7 @@ export const committeeMembers: CommitteeMember[] = [
     position: "President", 
     roleType: "core",
     image: "/images/committee/president.jpeg",
-    message: "An official message from the President of TeLSA will be published soon."
+    message: "Welcome to the Terai Law Students' Association. As President, I am honored to lead this esteemed body of scholars in our shared pursuit of academic excellence, legal literacy, and social justice. Together, we shall elevate the standards of legal discourse and ensure that every voice from the Terai region resonates powerfully within the halls of justice."
   },
   { name: "Ayan Yadav", position: "Vice President", roleType: "core", image: "/images/committee/vice_president.jpeg" },
   { name: "Amar Yadav", position: "Secretary", roleType: "core", image: "/images/committee/secretary.jpeg" },

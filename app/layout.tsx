@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: organization.name,
     locale: "en_NP",
     type: "website",
-    images: [{ url: "https://telsa.org.np/og-image.jpg", width: 1200, height: 630 }],
+    images: [{ url: "https://telsa.org.np/opengraph-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -71,7 +71,7 @@ export default function RootLayout({
     name: organization.name,
     alternateName: organization.shortName,
     url: organization.domain,
-    // logo: `${organization.domain}/logo.png`, // Uncomment when logo exists
+    logo: `${organization.domain}/images/telsa-logo.jpeg`,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: organization.phone,

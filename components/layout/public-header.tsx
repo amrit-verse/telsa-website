@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { publicNavigation } from "@/lib/data/navigation";
 import MobileNav from "@/components/layout/mobile-nav";
@@ -29,10 +30,15 @@ export default function PublicHeader() {
           
           {/* Institutional Monogram */}
           <Link href="/" className="flex items-center gap-4 focus:outline-none focus:ring-2 focus:ring-secondary p-1">
-            <div className="w-14 h-14 border border-primary flex items-center justify-center p-1 rounded-none">
-              <div className="w-full h-full bg-primary flex items-center justify-center text-primary-foreground font-serif text-2xl" aria-hidden="true">
-                <span className="leading-none tracking-tighter" style={{ fontFamily: "var(--font-playfair)" }}>T<span className="text-secondary text-lg">e</span>LSA</span>
-              </div>
+            <div className="relative w-14 h-14 flex items-center justify-center rounded-none overflow-hidden border border-border bg-white shadow-sm shrink-0">
+              <Image 
+                src="/images/telsa-logo.jpeg" 
+                alt={`${organization.shortName} Official Logo`} 
+                fill
+                className="object-contain p-0.5"
+                sizes="56px"
+                priority
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-2xl leading-none text-primary dark:text-primary-foreground tracking-normal">{organization.name}</span>
@@ -60,9 +66,9 @@ export default function PublicHeader() {
             
             <Link 
               href="/join" 
-              className="ml-4 inline-flex h-10 items-center justify-center rounded-none bg-secondary px-6 text-sm font-bold text-secondary-foreground hover:bg-secondary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary uppercase tracking-wider"
+              className="ml-4 inline-flex h-10 items-center justify-center rounded-none bg-primary border border-primary px-6 text-xs font-bold text-primary-foreground hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary uppercase tracking-[0.15em]"
             >
-              Join TeLSA
+              Membership Application
             </Link>
           </nav>
 

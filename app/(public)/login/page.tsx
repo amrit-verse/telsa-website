@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, AlertCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 function LoginForm() {
   const router = useRouter();
@@ -108,8 +109,8 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md bg-card border border-border p-8 md:p-10 rounded-sm shadow-sm relative z-10">
         <div className="text-center mb-10">
-          <Link href="/" className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-6 ring-4 ring-background">
-            <span className="font-serif text-3xl font-bold text-primary-foreground">T</span>
+          <Link href="/" className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full mb-6 ring-4 ring-background overflow-hidden border border-border">
+            <Image src="/images/telsa-logo.jpeg" alt="TeLSA Logo" width={80} height={80} className="object-contain p-1" priority />
           </Link>
           <h1 className="font-serif text-3xl font-bold text-primary mb-2">Member Login</h1>
           <p className="text-sm text-muted-foreground">Access the TeLSA administration portal.</p>
