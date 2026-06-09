@@ -61,10 +61,6 @@ export default function HomePage() {
         <section className="py-20 bg-slate-50 dark:bg-slate-900 border-b border-border">
           <div className="container mx-auto px-4 md:px-8">
             <div className="max-w-4xl mx-auto bg-card border border-border p-8 md:p-12 rounded-sm shadow-sm flex flex-col md:flex-row gap-8 items-center">
-<<<<<<< HEAD
-              <div className="shrink-0 w-40 h-40 md:w-48 md:h-48 rounded-sm bg-primary flex items-center justify-center border border-primary/20 overflow-hidden">
-                <span className="font-serif text-5xl md:text-6xl text-primary-foreground font-bold tracking-widest">AKR</span>
-=======
               <div className="shrink-0 w-48 h-48 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-background shadow-md overflow-hidden flex items-center justify-center relative">
                 {president.image ? (
                   <Image 
@@ -77,7 +73,6 @@ export default function HomePage() {
                 ) : (
                   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground opacity-50"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 )}
->>>>>>> fac743c (Final release candidate polish)
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="font-serif text-2xl font-bold text-primary mb-2">Message from the Leadership</h2>

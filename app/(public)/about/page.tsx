@@ -1,10 +1,7 @@
 import { Metadata } from "next";
-<<<<<<< HEAD
 import { organization } from "@/lib/data/organization";
 import Link from "next/link";
-=======
 import Image from "next/image";
->>>>>>> fac743c (Final release candidate polish)
 
 export const metadata: Metadata = {
   title: "History & Mandate | Terai Law Students Association",
@@ -39,7 +36,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-<<<<<<< HEAD
       {/* The Six Pillars */}
       <section className="mb-24">
         <h2 className="font-serif text-3xl font-bold text-primary mb-10 border-b border-border pb-4">Core Objectives</h2>
@@ -93,9 +89,11 @@ export default function AboutPage() {
           >
             Review the Constitution
           </Link>
-=======
+        </div>
+      </section>
+
       {/* Origin Story / Organization info */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 className="font-serif text-3xl font-bold text-primary mb-6">Our Roots</h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
@@ -114,7 +112,6 @@ export default function AboutPage() {
             sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300"></div>
->>>>>>> fac743c (Final release candidate polish)
         </div>
       </section>
     </div>

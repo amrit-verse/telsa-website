@@ -9,18 +9,11 @@ import Link from "next/link";
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-<<<<<<< HEAD
-  const callbackUrl = searchParams?.get("callbackUrl") || "/dashboard";
-  
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | null>(null);
-=======
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
   const [error, setError] = useState<string | null>(
     searchParams.get("error") === "CredentialsSignin" ? "Invalid email or password." : null
   );
   const [isPending, startTransition] = useTransition();
->>>>>>> fac743c (Final release candidate polish)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,14 +22,11 @@ function LoginForm() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-<<<<<<< HEAD
-=======
     if (!email || !password) {
       setError("Please fill in all fields.");
       return;
     }
 
->>>>>>> fac743c (Final release candidate polish)
     startTransition(async () => {
       const res = await signIn("credentials", {
         redirect: false,
@@ -45,18 +35,10 @@ function LoginForm() {
         callbackUrl,
       });
 
-<<<<<<< HEAD
-      if (!res?.error) {
-        router.push(callbackUrl);
-        router.refresh();
-      } else {
-        setError("Invalid email or password.");
-=======
       if (res?.error) {
         setError("Invalid email or password.");
       } else if (res?.url) {
         router.push(res.url);
->>>>>>> fac743c (Final release candidate polish)
       }
     });
   }
@@ -64,42 +46,14 @@ function LoginForm() {
   return (
     <>
       {error && (
-<<<<<<< HEAD
-        <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 text-destructive text-sm rounded-sm flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 shrink-0" />
-          <p className="mt-0.5">{error}</p>
-=======
         <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 text-destructive rounded-sm flex items-start gap-3">
           <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
           <p className="font-medium text-sm">{error}</p>
->>>>>>> fac743c (Final release candidate polish)
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
-<<<<<<< HEAD
-          <label className="text-sm font-bold text-primary">Email Address</label>
-          <input 
-            required 
-            name="email" 
-            type="email" 
-            placeholder="you@example.com"
-            className="w-full px-4 py-2 border border-border rounded-sm bg-background text-sm focus:outline-none focus:ring-1 focus:ring-secondary" 
-          />
-        </div>
-        
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-bold text-primary">Password</label>
-            <Link href="#" className="text-xs text-secondary hover:underline">Forgot password?</Link>
-          </div>
-          <input 
-            required 
-            name="password" 
-            type="password" 
-            className="w-full px-4 py-2 border border-border rounded-sm bg-background text-sm focus:outline-none focus:ring-1 focus:ring-secondary" 
-=======
           <label className="text-sm font-bold text-primary" htmlFor="email">Email Address</label>
           <input 
             required 
@@ -123,21 +77,12 @@ function LoginForm() {
             autoComplete="current-password"
             className="w-full px-4 py-3 border border-border rounded-sm bg-background text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-shadow" 
             placeholder="••••••••"
->>>>>>> fac743c (Final release candidate polish)
           />
         </div>
 
         <button 
           type="submit" 
           disabled={isPending}
-<<<<<<< HEAD
-          className="w-full py-3 bg-primary text-primary-foreground font-medium rounded-sm flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors"
-        >
-          {isPending ? (
-            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Signing In...</>
-          ) : (
-            "Sign In"
-=======
           className="w-full h-12 bg-primary text-primary-foreground text-sm font-bold rounded-sm hover:bg-primary/90 transition-colors flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed mt-2"
         >
           {isPending ? (
@@ -147,7 +92,6 @@ function LoginForm() {
             </>
           ) : (
             "Sign In to Portal"
->>>>>>> fac743c (Final release candidate polish)
           )}
         </button>
       </form>
@@ -157,22 +101,6 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-<<<<<<< HEAD
-    <div className="container mx-auto px-4 py-24 max-w-md">
-      <div className="bg-card border border-border rounded-sm p-8 shadow-sm">
-        <div className="text-center mb-8">
-          <h1 className="font-serif text-3xl font-bold text-primary mb-2">Sign In</h1>
-          <p className="text-sm text-muted-foreground">Access your TeLSA account</p>
-        </div>
-
-        <Suspense fallback={<div className="py-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-muted-foreground" /></div>}>
-          <LoginForm />
-        </Suspense>
-        
-        <div className="mt-8 text-center text-sm text-muted-foreground border-t border-border pt-6">
-          Don&apos;t have an account? <Link href="/join" className="text-secondary font-bold hover:underline">Apply for Membership</Link>
-        </div>
-=======
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary/5 rounded-full blur-3xl" aria-hidden="true"></div>
@@ -190,7 +118,6 @@ export default function LoginPage() {
         <Suspense fallback={<div className="flex justify-center p-8"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>}>
           <LoginForm />
         </Suspense>
->>>>>>> fac743c (Final release candidate polish)
       </div>
     </div>
   );

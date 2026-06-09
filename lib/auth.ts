@@ -5,10 +5,6 @@ import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
-import { z } from "zod";
-import bcrypt from "bcryptjs";
-import { db } from "@/lib/db";
-
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1, "Password is required"),
@@ -51,40 +47,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-<<<<<<< HEAD
-        if (!credentials?.email || !credentials?.password) return null;
-        
-        try {
-          const schema = z.object({
-            email: z.string().email(),
-            password: z.string()
-          });
-          
-          const parsed = schema.safeParse(credentials);
-          if (!parsed.success) return null;
-          
-          const user = await db.user.findUnique({
-            where: { email: parsed.data.email },
-            include: { membership: true }
-          });
-          
-          if (!user) return null;
-          
-          const isValid = await bcrypt.compare(parsed.data.password, user.passwordHash);
-          if (!isValid) return null;
-          
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            role: user.role,
-            status: user.membership?.status
-          };
-        } catch (error) {
-          console.error("Auth error:", error);
-          return null;
-        }
-=======
         const parsed = loginSchema.safeParse(credentials);
         if (!parsed.success) return null;
 
@@ -108,13 +70,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           role: user.role,
           status: user.membership?.status,
         };
->>>>>>> fac743c (Final release candidate polish)
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
-      // First time login, 'user' is populated from authorize()
       if (user) {
         if (user?.id) token.id = user.id;
         token.role = user.role;
@@ -124,9 +84,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
-        session.user.status = token.status;
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+        session.user.status = token.status as string | undefined;
       }
       return session;
     },
