@@ -34,19 +34,18 @@ export default function GalleryPage() {
       {/* Album Grid Architecture */}
       <h3 className="font-serif text-2xl font-bold text-primary mb-8 border-b pb-4">All Albums</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Placeholder Albums */}
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="group cursor-pointer">
-            <div className="relative h-64 bg-slate-100 dark:bg-slate-900 border border-border rounded-sm overflow-hidden mb-4">
-              <div className="absolute inset-0 flex items-center justify-center">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground opacity-30"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-              </div>
-              <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors"></div>
+        {/* Empty State / Curation Notice */}
+        <div className="col-span-1 sm:col-span-2 lg:col-span-3">
+          <div className="bg-slate-50 dark:bg-slate-900/50 rounded-sm p-12 border border-border flex flex-col items-center justify-center min-h-[300px] text-center shadow-sm">
+            <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary opacity-80"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
             </div>
-            <h4 className="font-bold text-primary group-hover:text-secondary transition-colors">Album Title Placeholder {i}</h4>
-            <p className="text-sm text-muted-foreground">Event Date • 0 Photos</p>
+            <h4 className="font-serif text-2xl font-bold text-primary mb-3">Gallery Curation in Progress</h4>
+            <p className="text-muted-foreground max-w-lg leading-relaxed">
+              Official imagery from recent academic workshops, moot courts, and cultural programs are currently being curated and will be uploaded shortly.
+            </p>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

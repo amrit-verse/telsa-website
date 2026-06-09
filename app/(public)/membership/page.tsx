@@ -97,10 +97,10 @@ export default function MembershipPage() {
         </div>
         
         <div className="pt-8 border-t border-primary-foreground/20">
-          <p className="mb-6 text-primary-foreground/80">The online application portal is currently being finalized.</p>
-          <button disabled className="bg-secondary/50 text-primary-foreground/50 cursor-not-allowed px-8 py-3 rounded-sm font-medium border border-transparent">
-            Apply for Membership (Coming Soon)
-          </button>
+          <p className="mb-6 text-primary-foreground/80 font-medium">The online application portal is now open for the current academic session.</p>
+          <Link href="/join" className="inline-block bg-background text-primary px-8 py-3 rounded-sm font-bold border-2 border-background hover:bg-transparent hover:text-background transition-colors focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary">
+            Begin Online Application
+          </Link>
         </div>
       </section>
     </div>

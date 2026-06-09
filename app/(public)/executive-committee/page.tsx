@@ -26,11 +26,11 @@ export default function ExecutiveCommitteePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
           {coreMembers.map((member, index) => (
             <div key={index} className="bg-card border border-border rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-              {/* Image Placeholder */}
-              <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 flex items-center justify-center relative overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 dark:text-slate-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              {/* Typographic Monogram Fallback */}
+              <div className="w-full h-64 bg-primary flex items-center justify-center relative overflow-hidden">
+                <span className="font-serif text-6xl text-primary-foreground font-bold tracking-widest">{member.name.charAt(0)}</span>
                 {/* Subtle gradient overlay to match aesthetic */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               <div className="p-6 text-center border-t-2 border-secondary/20 group-hover:border-secondary transition-colors">
                 <h3 className="font-serif text-xl font-bold text-primary mb-1">{member.name}</h3>
@@ -47,8 +47,8 @@ export default function ExecutiveCommitteePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {execMembers.map((member, index) => (
             <div key={index} className="bg-card border border-border p-6 rounded-sm text-center shadow-sm hover:border-secondary/50 transition-colors">
-              <div className="w-20 h-20 mx-auto rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 dark:text-slate-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4 border border-primary/20">
+                <span className="font-serif text-2xl font-bold text-primary">{member.name.charAt(0)}</span>
               </div>
               <h3 className="font-serif text-lg font-bold text-primary mb-1">{member.name}</h3>
               <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">{member.position}</p>
