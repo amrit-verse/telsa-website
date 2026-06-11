@@ -63,7 +63,7 @@ function LoginForm() {
             type="email" 
             autoComplete="email"
             className="w-full px-4 py-3 border border-border rounded-sm bg-background text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-shadow" 
-            placeholder="admin@telsa.org.np"
+            placeholder="admin@terailawassociation.org.np"
           />
         </div>
         <div className="space-y-2">

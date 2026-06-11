@@ -64,7 +64,7 @@ export default async function PublicationDetailPage({ params }: Props) {
       "@type": "Organization",
       "name": "Terai Law Students' Association (TeLSA)"
     },
-    "url": `https://telsa.org.np/publications/${pub.slug}`,
+    "url": `https://terailawassociation.org.np/publications/${pub.slug}`,
     "keywords": pub.tags.join(", ")
   };
 

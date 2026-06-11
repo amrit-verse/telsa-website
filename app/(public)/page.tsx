@@ -5,6 +5,7 @@ import { organization } from "@/lib/data/organization";
 import { committeeMembers, getPresident } from "@/lib/data/committee";
 import { db } from "@/lib/db";
 import { format } from "date-fns";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Official Homepage | Terai Law Students' Association",
@@ -44,8 +45,25 @@ export default async function HomePage() {
     }))
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Official Homepage | Terai Law Students' Association",
+    "description": "Official representative body for Terai-origin law students at Prithvi Narayan Campus. Alternate names: TELSA, Terai Law Association, Terai Law Students Association Nepal, Terai Kanun Bidhyarthi Manch, तराई कानुन विद्यार्थी मञ्च.",
+    "url": "https://terailawassociation.org.np",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Terai Law Students' Association"
+    }
+  };
+
   return (
     <>
+      <Script
+        id="json-ld-homepage"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Formal Header/Hero */}
       <section className="w-full bg-white dark:bg-slate-950 py-16 md:py-20 lg:py-32 border-b-2 border-primary relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-8">
@@ -67,7 +85,7 @@ export default async function HomePage() {
               <div className="w-full max-w-2xl h-px bg-border mb-10"></div>
               
               <p className="text-lg sm:text-xl md:text-3xl text-primary/80 dark:text-primary-foreground/80 max-w-3xl leading-relaxed font-serif">
-                The definitive representative body dedicated to academic rigor, student advocacy, and the uncompromising defense of legal rights at Prithvi Narayan Campus.
+                The definitive representative body dedicated to academic rigor, student advocacy, and the uncompromising defense of legal rights at Prithvi Narayan Campus. Also known as TELSA (तराई कानुन विद्यार्थी मञ्च), we empower law students from the Terai/Madhesh region of Nepal.
               </p>
             </div>
             

@@ -27,20 +27,20 @@ export const metadata: Metadata = {
     template: `%s | ${organization.shortName}`,
     default: organization.name,
   },
-  description: "Terai Law Students Association (TeLSA) is a student-led organization at Prithvi Narayan Campus, established in 2080 B.S., dedicated to legal education, moot court activities, and legal awareness.",
-  keywords: ["TeLSA", "Law Students", "Nepal", "Terai", "Madhesh", "Student-led legal organization", "Prithvi Narayan Campus", "Established 2080 B.S.", "Legal education", "Moot court activities", "Legal awareness"],
-  metadataBase: new URL("https://telsa.org.np"),
+  description: "Terai Law Students Association (TeLSA) - तराई कानुन विद्यार्थी मञ्च - is a student-led organization at Prithvi Narayan Campus, established in 2080 B.S., dedicated to legal education, moot court activities, and legal awareness for law students from the Terai/Madhesh region.",
+  keywords: ["TeLSA", "Law Students", "Nepal", "Terai", "Madhesh", "Student-led legal organization", "Prithvi Narayan Campus", "Established 2080 B.S.", "Legal education", "Moot court activities", "Legal awareness", "Terai Law Association", "Terai Law Students Association Nepal", "Terai Kanun Bidhyarthi Manch", "तराई कानुन विद्यार्थी मञ्च"],
+  metadataBase: new URL("https://terailawassociation.org.np"),
   alternates: {
-    canonical: "https://telsa.org.np",
+    canonical: "https://terailawassociation.org.np",
   },
   openGraph: {
     title: organization.name,
     description: "Promoting legal education and social justice among Terai/Madhesh law students.",
-    url: "https://telsa.org.np",
+    url: "https://terailawassociation.org.np",
     siteName: organization.name,
     locale: "en_NP",
     type: "website",
-    images: [{ url: "https://telsa.org.np/opengraph-image.png", width: 1200, height: 630 }],
+    images: [{ url: "https://terailawassociation.org.np/opengraph-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -67,30 +67,53 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "NGO",
-    name: organization.name,
-    alternateName: organization.shortName,
-    url: organization.domain,
-    logo: `${organization.domain}/images/telsa-logo.jpeg`,
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: organization.phone,
-      contactType: "office",
-      email: organization.email,
-    },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Prithvi Narayan Campus",
-      addressLocality: "Pokhara",
-      addressRegion: "Gandaki",
-      addressCountry: "NP",
-    },
-    foundingDate: "2080 B.S.",
-    sameAs: [
-      organization.socials.facebook,
-      organization.socials.twitter,
-      organization.socials.instagram,
-    ],
+    "@graph": [
+      {
+        "@type": "NGO",
+        "@id": `${organization.domain}/#organization`,
+        name: organization.name,
+        alternateName: [
+          organization.shortName,
+          "Terai Law Students' Association",
+          "Terai Law Association",
+          "Terai Law Students Association Nepal",
+          "Terai Kanun Bidhyarthi Manch",
+          "तराई कानुन विद्यार्थी मञ्च"
+        ],
+        url: organization.domain,
+        logo: `${organization.domain}/images/telsa-logo.jpeg`,
+        description: "Student-led legal organization promoting legal education, leadership, advocacy, research, and opportunities for law students.",
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: organization.phone,
+          contactType: "office",
+          email: organization.email,
+        },
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Prithvi Narayan Campus",
+          addressLocality: "Pokhara",
+          addressRegion: "Gandaki",
+          addressCountry: "NP",
+        },
+        foundingDate: "2080 B.S.",
+        sameAs: [
+          organization.socials.facebook,
+          organization.socials.twitter,
+          organization.socials.instagram,
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${organization.domain}/#website`,
+        url: organization.domain,
+        name: organization.name,
+        description: "Official representative body for Terai-origin law students at Prithvi Narayan Campus.",
+        publisher: {
+          "@id": `${organization.domain}/#organization`
+        }
+      }
+    ]
   };
 
   return (

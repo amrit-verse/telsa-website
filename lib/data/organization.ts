@@ -3,9 +3,9 @@ export const organization = {
   shortName: "TeLSA",
   established: "2080 B.S.",
   location: "Faculty of Law, Block B, Prithvi Narayan Campus, Bagar, Pokhara",
-  email: "executive@telsa.org.np",
+  email: "executive@terailawassociation.org.np",
   phone: "+977 976-8028358",
-  domain: "https://telsa.org.np",
+  domain: "https://terailawassociation.org.np",
   socials: {
     facebook: "https://facebook.com/telsanepal",
     twitter: "https://twitter.com/telsanepal",
