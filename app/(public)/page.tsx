@@ -50,7 +50,7 @@ export default async function HomePage() {
     "@type": "WebPage",
     "name": "Official Homepage | Terai Law Students' Association",
     "description": "Official representative body for Terai-origin law students at Prithvi Narayan Campus. Alternate names: TELSA, Terai Law Association, Terai Law Students Association Nepal, Terai Kanun Bidhyarthi Manch, तराई कानुन विद्यार्थी मञ्च.",
-    "url": "https://terailawassociation.org.np",
+    "url": "https://www.terailawassociation.org.np",
     "publisher": {
       "@type": "Organization",
       "name": "Terai Law Students' Association"

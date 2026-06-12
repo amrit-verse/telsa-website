@@ -19,6 +19,6 @@ export default function robots(): MetadataRoute.Robots {
         '/*?*' // Block search query parameters to prevent duplicate indexing
       ],
     },
-    sitemap: 'https://terailawassociation.org.np/sitemap.xml',
+    sitemap: 'https://www.terailawassociation.org.np/sitemap.xml',
   };
 }

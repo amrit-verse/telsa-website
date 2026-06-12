@@ -29,18 +29,18 @@ export const metadata: Metadata = {
   },
   description: "Terai Law Students Association (TeLSA) - तराई कानुन विद्यार्थी मञ्च - is a student-led organization at Prithvi Narayan Campus, established in 2080 B.S., dedicated to legal education, moot court activities, and legal awareness for law students from the Terai/Madhesh region.",
   keywords: ["TeLSA", "Law Students", "Nepal", "Terai", "Madhesh", "Student-led legal organization", "Prithvi Narayan Campus", "Established 2080 B.S.", "Legal education", "Moot court activities", "Legal awareness", "Terai Law Association", "Terai Law Students Association Nepal", "Terai Kanun Bidhyarthi Manch", "तराई कानुन विद्यार्थी मञ्च"],
-  metadataBase: new URL("https://terailawassociation.org.np"),
+  metadataBase: new URL("https://www.terailawassociation.org.np"),
   alternates: {
-    canonical: "https://terailawassociation.org.np",
+    canonical: "https://www.terailawassociation.org.np",
   },
   openGraph: {
     title: organization.name,
     description: "Promoting legal education and social justice among Terai/Madhesh law students.",
-    url: "https://terailawassociation.org.np",
+    url: "https://www.terailawassociation.org.np",
     siteName: organization.name,
     locale: "en_NP",
     type: "website",
-    images: [{ url: "https://terailawassociation.org.np/opengraph-image.png", width: 1200, height: 630 }],
+    images: [{ url: "https://www.terailawassociation.org.np/opengraph-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -73,10 +73,8 @@ export default function RootLayout({
         "@id": `${organization.domain}/#organization`,
         name: organization.name,
         alternateName: [
-          organization.shortName,
-          "Terai Law Students' Association",
+          "TELSA",
           "Terai Law Association",
-          "Terai Law Students Association Nepal",
           "Terai Kanun Bidhyarthi Manch",
           "तराई कानुन विद्यार्थी मञ्च"
         ],

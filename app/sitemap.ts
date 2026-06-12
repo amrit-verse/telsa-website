@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { db as prisma } from "@/lib/db";
 
-const BASE_URL = 'https://terailawassociation.org.np';
+const BASE_URL = 'https://www.terailawassociation.org.np';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static Routes
