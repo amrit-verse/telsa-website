@@ -16,11 +16,11 @@ export const committeeMembers: CommitteeMember[] = [
   },
   { name: "Ayan Yadav", position: "Vice President", roleType: "core", image: "/images/committee/vice_president.jpeg" },
   { name: "Amar Yadav", position: "Secretary", roleType: "core", image: "/images/committee/secretary.jpeg" },
-  { name: "Sachin Kumar Sah", position: "Joint Secretary", roleType: "core", image: "/images/committee/joint_secretary.jpeg" },
   { name: "Shova Yadav", position: "Treasurer", roleType: "core", image: "/images/committee/treasurer.jpeg" },
-  { name: "Nitesh Kumar Yadav", position: "Executive Member", roleType: "executive" },
+  { name: "Sachin Kumar Sah", position: "Joint Secretary", roleType: "core", image: "/images/committee/joint_secretary.jpeg" },
+  { name: "Nitesh Kr. Sah", position: "Executive Member", roleType: "executive", image: "/images/committee/nitesh.jpeg" },
   { name: "Richa Patel", position: "Executive Member", roleType: "executive", image: "/images/committee/richa.jpeg" },
-  { name: "Madhumitta Yadav", position: "Executive Member", roleType: "executive" },
+  { name: "Madhumitta Yadav", position: "Executive Member", roleType: "executive", image: "/images/committee/madhumitta.jpeg" },
   { name: "Surendra Kumar Paswan", position: "Executive Member", roleType: "executive", image: "/images/committee/surendra.jpeg" },
 ];
 

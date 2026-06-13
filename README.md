@@ -156,6 +156,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📬 Maintainers
 
 - **Terai Law Students Association (TeLSA)** – Executive Committee
-- **Technical Contact:** [asktelsa@gmail.com](mailto:asktelsa@gmail.com)
+- **Technical Contact:** [contact@terailawassociation.org.np](mailto:contact@terailawassociation.org.np)
 
 For major feature requests or organizational inquiries, please open an issue or contact the administration directly.

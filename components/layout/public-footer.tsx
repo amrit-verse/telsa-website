@@ -49,7 +49,7 @@ export default function PublicFooter() {
               <p className="mt-4 text-xs font-sans tracking-widest uppercase text-muted-foreground">Direct Line</p>
               <p><a href="tel:9768028358" className="hover:text-white transition-colors font-sans">9768028358</a></p>
               <p className="mt-2 text-xs font-sans tracking-widest uppercase text-muted-foreground">Official Correspondence</p>
-              <p><a href="mailto:asktelsa@gmail.com" className="hover:text-white transition-colors font-sans break-all">asktelsa@gmail.com</a></p>
+              <p><a href="mailto:info@terailawassociation.org.np" className="hover:text-white transition-colors font-sans break-all">info@terailawassociation.org.np</a></p>
             </address>
           </div>
         </div>
